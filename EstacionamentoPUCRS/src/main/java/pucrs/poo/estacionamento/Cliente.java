@@ -7,6 +7,7 @@ public abstract class Cliente {
     private String cpf;
     private String nome;
     private String celular;
+    private Set<String> veiculos;
 
     public String getCpf() {
         return this.cpf;

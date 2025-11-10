@@ -2,9 +2,9 @@ package pucrs.poo.estacionamento;
 
 import java.time.LocalDateTime;
 
-public class Pucrs {
+public class Pucrs extends Cliente {
     public void cadastraVeiculo(String placa) {
-        return;
+        super.getVeiculos().add(placa);
     }
 
     public void calculaCusto(LocalDateTime chegada, LocalDateTime saida) {
