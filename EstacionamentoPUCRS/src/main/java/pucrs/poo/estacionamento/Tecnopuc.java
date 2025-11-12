@@ -21,7 +21,6 @@ public class Tecnopuc extends Cliente {
 
     @Override
     public void cadastraVeiculo(String placa) {
-        if (super.getVeiculos().size() < 2)
             super.getVeiculos().add(placa);
     }
 
