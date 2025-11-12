@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ServicoDeEstacionamento {
-
+    private final int vagasTotais = 500;
     private Map<String, LocalDateTime> veiculosEstacionados;
     private CadastroClientes CadastroClientes;
 
