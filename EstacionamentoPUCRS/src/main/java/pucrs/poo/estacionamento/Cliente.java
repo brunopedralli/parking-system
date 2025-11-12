@@ -9,6 +9,12 @@ public abstract class Cliente {
     private String celular;
     private Set<String> veiculos;
 
+    public Cliente(String cpf, String nome, String celular) {
+        this.cpf = cpf;
+        this.nome = nome;
+        this.celular = celular;
+    }
+
     public String getCpf() {
         return this.cpf;
     }
