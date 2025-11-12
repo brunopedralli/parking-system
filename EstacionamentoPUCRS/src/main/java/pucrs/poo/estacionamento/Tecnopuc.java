@@ -4,14 +4,14 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Tecnopuc extends Cliente {
-    private int debitos;
+    private double debitos;
 
-    public Tecnopuc(String cpf, String nome, String celular, int debitos) {
+    public Tecnopuc(String cpf, String nome, String celular, double debitos) {
         super(cpf, nome, celular);
         this.debitos = debitos;
     }
 
-    public int getDebitos() {
+    public double getDebitos() {
         return debitos;
     }
 
