@@ -1,6 +1,7 @@
 package pucrs.poo.estacionamento;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 public abstract class Cliente {
@@ -13,6 +14,7 @@ public abstract class Cliente {
         this.cpf = cpf;
         this.nome = nome;
         this.celular = celular;
+        this.veiculos = new HashSet<>();
     }
 
     public String getCpf() {
@@ -28,7 +30,7 @@ public abstract class Cliente {
     }
 
     public Set<String> getVeiculos() {
-        return null;
+        return veiculos;
     }
 
     public abstract void cadastraVeiculo(String placa);

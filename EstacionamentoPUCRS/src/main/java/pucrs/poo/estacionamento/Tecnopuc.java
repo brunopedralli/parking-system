@@ -1,5 +1,6 @@
 package pucrs.poo.estacionamento;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Tecnopuc extends Cliente {
@@ -25,6 +26,10 @@ public class Tecnopuc extends Cliente {
 
     @Override
     public void calculaCusto(LocalDateTime chegada, LocalDateTime saida) {
-        return;
+        Duration dt = Duration.between(chegada, saida);
+        long tempo = dt.toHours();
+        double custo = tempo * 1.5;
+
+        this.debitos += custo;
     }
 }
