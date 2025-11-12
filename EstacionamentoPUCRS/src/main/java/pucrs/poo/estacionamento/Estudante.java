@@ -20,7 +20,8 @@ public class Estudante extends Cliente {
 
     @Override
     public void cadastraVeiculo(String placa) {
-        super.getVeiculos().add(placa);
+        if (super.getVeiculos().size() < 2)
+            super.getVeiculos().add(placa);
     }
 
     @Override

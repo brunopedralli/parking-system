@@ -16,7 +16,7 @@ public class CadastroClientes {
     }
 
     private CadastroClientes() {
-        lista = carregaClientesLista("clientes");
+        this.lista = carregaClientesLista("clientes");
     }
 
     public void add(Cliente cli) {
