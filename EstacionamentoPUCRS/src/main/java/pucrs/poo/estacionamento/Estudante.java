@@ -11,10 +11,19 @@ public class Estudante extends Cliente {
     }
 
     public int getCreditos() {
-        return 0;
+        return this.creditos;
     }
 
     public boolean adicionaCreditos(int creditos) {
+        switch (creditos) {
+            case 15:
+            case 50:
+            case 100:
+            case 150:
+                this.creditos = creditos;
+                return true;
+        }
+
         return false;
     }
 
