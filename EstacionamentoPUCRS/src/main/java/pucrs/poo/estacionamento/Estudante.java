@@ -1,5 +1,6 @@
 package pucrs.poo.estacionamento;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Estudante extends Cliente {
@@ -35,6 +36,11 @@ public class Estudante extends Cliente {
 
     @Override
     public void calculaCusto(LocalDateTime chegada, LocalDateTime saida) {
-        return;
+        Duration dt = Duration.between(chegada, saida);
+        long minutosTotais = dt.toMinutes();
+        if(minutosTotais < 15) {
+            return;
+        }
+        this.creditos -=15;
     }
 }
