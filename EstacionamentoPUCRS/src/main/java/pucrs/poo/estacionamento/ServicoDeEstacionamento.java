@@ -19,7 +19,7 @@ public class ServicoDeEstacionamento {
     }
     
     public void entrada(String placa, LocalDateTime horarioEntrada) {
-        if (this.ocupacao >= vagasTotais) {
+        if (ocupacao >= vagasTotais) {
             System.out.print("Entrada recusada, pois o estacionamento já está lotado. Pedimos perdão pela inconveniência.");
             return;
         }
@@ -46,22 +46,27 @@ public class ServicoDeEstacionamento {
             }
         }
 
-        this.veiculosEstacionados.put(placa, horarioEntrada);
-        this.ocupacao++;
+        veiculosEstacionados.put(placa, horarioEntrada);
+        ocupacao++;
     }
 
     public boolean saida(String placa, LocalDateTime horarioSaida) {
         if (!this.veiculosEstacionados.containsKey(placa)) {
-            System.out.print("Houve um erro no sistema. Por favor, aguarde um momento.");
+            System.out.print("Houve um erro no sistema. Pedimos perdão pela inconveniência.");
             return false;
         }
 
         LocalDateTime horarioEntrada = veiculosEstacionados.get(placa);
-        Cliente cli = cadClientes.getPorPlaca(placa);
-        cli.calculaCusto(horarioEntrada, horarioSaida);
+        Duration dt = Duration.between(horarioEntrada, horarioSaida);
+        long minutosTotais = dt.toMinutes();
 
-        this.veiculosEstacionados.remove(placa);
-        this.ocupacao--;
+        if (minutosTotais < 15) {
+            Cliente cli = cadClientes.getPorPlaca(placa);
+            cli.calculaCusto(horarioEntrada, horarioSaida);        
+        }
+
+        veiculosEstacionados.remove(placa);
+        ocupacao--;
 
         return true;
     }

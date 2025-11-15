@@ -36,13 +36,6 @@ public class Estudante extends Cliente {
 
     @Override
     public void calculaCusto(LocalDateTime chegada, LocalDateTime saida) {
-        Duration dt = Duration.between(chegada, saida);
-        long minutosTotais = dt.toMinutes();
-
-        if (minutosTotais < 15) {
-            return;
-        }
-
-        this.creditos -=15;
+        this.creditos -= 15;
     }
 }

@@ -29,10 +29,6 @@ public class Tecnopuc extends Cliente {
         Duration dt = Duration.between(chegada, saida);
         long minutosTotais = dt.toMinutes();
 
-        if (minutosTotais < 15) {
-            return;
-        }
-
         double horasCobraveis = Math.ceil(minutosTotais/60.0);
         double custo = horasCobraveis * 1.5;
 
