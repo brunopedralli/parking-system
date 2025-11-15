@@ -12,7 +12,7 @@ public class Tecnopuc extends Cliente {
     }
 
     public double getDebitos() {
-        return debitos;
+        return this.debitos;
     }
 
     public void abateDebito(int valor) {
@@ -21,16 +21,18 @@ public class Tecnopuc extends Cliente {
 
     @Override
     public void cadastraVeiculo(String placa) {
-            super.getVeiculos().add(placa);
+        super.getVeiculos().add(placa);
     }
 
     @Override
     public void calculaCusto(LocalDateTime chegada, LocalDateTime saida) {
         Duration dt = Duration.between(chegada, saida);
         long minutosTotais = dt.toMinutes();
-        if(minutosTotais < 15) {
+
+        if (minutosTotais < 15) {
             return;
         }
+
         double horasCobraveis = Math.ceil(minutosTotais/60.0);
         double custo = horasCobraveis * 1.5;
 

@@ -21,7 +21,7 @@ public class Estudante extends Cliente {
             case 50:
             case 100:
             case 150:
-                this.creditos = creditos;
+                this.creditos += creditos;
                 return true;
         }
 
@@ -38,9 +38,11 @@ public class Estudante extends Cliente {
     public void calculaCusto(LocalDateTime chegada, LocalDateTime saida) {
         Duration dt = Duration.between(chegada, saida);
         long minutosTotais = dt.toMinutes();
-        if(minutosTotais < 15) {
+
+        if (minutosTotais < 15) {
             return;
         }
+
         this.creditos -=15;
     }
 }
