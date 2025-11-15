@@ -48,6 +48,7 @@ public class ServicoDeEstacionamento {
         }
 
         this.veiculosEstacionados.put(placa, horarioEntrada);
+        this.ocupacao++;
     }
 
     public boolean saida(String placa, LocalDateTime horarioSaida) {
