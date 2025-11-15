@@ -1,10 +1,15 @@
 package pucrs.poo.estacionamento;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Estudante extends Cliente {
     private int creditos;
+    private static final Set<Integer> valoresRecarga = new HashSet<>(
+        Arrays.asList(10, 50, 100)
+    );
 
     public Estudante(String cpf, String nome, String celular, int creditos) {
         super(cpf, nome, celular);
@@ -16,13 +21,9 @@ public class Estudante extends Cliente {
     }
 
     public boolean adicionaCreditos(int creditos) {
-        switch (creditos) {
-            case 15:
-            case 50:
-            case 100:
-            case 150:
-                this.creditos += creditos;
-                return true;
+        if (valoresRecarga.contains(creditos)) {
+            this.creditos += creditos;
+            return true;
         }
 
         return false;
