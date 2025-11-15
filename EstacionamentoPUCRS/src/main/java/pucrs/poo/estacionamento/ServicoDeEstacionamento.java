@@ -1,5 +1,6 @@
 package pucrs.poo.estacionamento;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +19,7 @@ public class ServicoDeEstacionamento {
     }
     
     public void entrada(String placa, LocalDateTime horarioEntrada) {
-        if (this.ocupacao >= 500) {
+        if (this.ocupacao >= vagasTotais) {
             System.out.print("Entrada recusada, pois o estacionamento já está lotado. Pedimos perdão pela inconveniência.");
             return;
         }
@@ -37,13 +38,11 @@ public class ServicoDeEstacionamento {
         if (cli instanceof Estudante) {
             Estudante aluno = (Estudante) cli;
             int cred = aluno.getCreditos();
-            if (cred < 0) {
-                if (cred < -15) {
+            if (cred < -15) {
                     System.out.print("Entrada recusada, por insuficiência de créditos.");
                     return;
-                } else {
-                    System.out.printf("Atenção! Você está com saldo devedor de: R$%.2f", (double) Math.abs(cred));
-                }
+            } else if (cred < 0) {
+                System.out.printf("Atenção! Você está com saldo devedor de: R$%.2f", (double) Math.abs(cred));
             }
         }
 
@@ -52,6 +51,18 @@ public class ServicoDeEstacionamento {
     }
 
     public boolean saida(String placa, LocalDateTime horarioSaida) {
-        return false;
+        if (!this.veiculosEstacionados.containsKey(placa)) {
+            System.out.print("Houve um erro no sistema. Por favor, aguarde um momento.");
+            return false;
+        }
+
+        LocalDateTime horarioEntrada = veiculosEstacionados.get(placa);
+        Cliente cli = cadClientes.getPorPlaca(placa);
+        cli.calculaCusto(horarioEntrada, horarioSaida);
+
+        this.veiculosEstacionados.remove(placa);
+        this.ocupacao--;
+
+        return true;
     }
 }
