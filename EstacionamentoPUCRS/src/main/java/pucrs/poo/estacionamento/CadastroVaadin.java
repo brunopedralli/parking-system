@@ -103,33 +103,44 @@ public class CadastroVaadin extends VerticalLayout {
         if (aceitaTermos.getValue() == false) {
             Notification.show("Você precisa aceitar os termos de serviço.", 3000, Notification.Position.TOP_CENTER)
                     .addThemeVariants(NotificationVariant.LUMO_ERROR);
+            return;
+        } 
+
+        if (cpf.getValue() == null || nome.getValue() == null || celular.getValue() == null || tipoUsuario.getValue() == null) {
+            Notification.show("Preencha todos os campos do cadastro para prosseguir.", 3000, Notification.Position.TOP_CENTER)
+                    .addThemeVariants(NotificationVariant.LUMO_ERROR);
+            return;
+        }
+
+        String tipo = tipoUsuario.getValue();
+        Cliente c;
+        if (tipo.equals("Estudante")) {
+            int cred = (creditos.getValue() == null) ? 0 : creditos.getValue();
+            c = new Estudante(cpf.getValue(),
+                                    nome.getValue(),
+                                    celular.getValue(),
+                                    cred);
+
+        } else if (tipo.equals("Tecnopuc")) {
+            double deb = (debitos.getValue() == null) ? 0 : debitos.getValue();
+            c = new Tecnopuc(cpf.getValue(),
+                                    nome.getValue(),
+                                    celular.getValue(),
+                                    deb);
+
         } else {
-            String tipo = tipoUsuario.getValue();
-            Cliente c;
-            if (tipo.equals("Estudante")) {
-                c = new Estudante(cpf.getValue(),
-                                    nome.getValue(),
-                                    celular.getValue(),
-                                    creditos.getValue());
-            } else if (tipo.equals("Tecnopuc")) {
-                c = new Tecnopuc(cpf.getValue(),
-                                    nome.getValue(),
-                                    celular.getValue(),
-                                    debitos.getValue());
-            } else {
-                c = new Pucrs(cpf.getValue(),
+            c = new Pucrs(cpf.getValue(),
                                 nome.getValue(),
                                 celular.getValue());
-            }
-
-            cadClientes.add(c);
-            
-            String mensagem = "Usuário " + c.getNome() + " salvo com sucesso!";
-            Notification.show(mensagem, 3000, Notification.Position.BOTTOM_STRETCH);
-
-            grid.getDataProvider().refreshAll();
-            limparFormulario();
         }
+
+        cadClientes.add(c);
+            
+        String mensagem = "Usuário " + c.getNome() + " salvo com sucesso!";
+        Notification.show(mensagem, 3000, Notification.Position.BOTTOM_STRETCH);
+
+        grid.getDataProvider().refreshAll();
+        limparFormulario();
     }
 
     private void limparFormulario() {
