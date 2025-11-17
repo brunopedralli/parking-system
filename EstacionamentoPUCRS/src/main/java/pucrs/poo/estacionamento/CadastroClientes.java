@@ -43,6 +43,10 @@ public class CadastroClientes {
         return null;
     }
 
+    public List<Cliente> getLista() {
+        return this.lista;
+    }
+
     private List<Cliente> carregaClientesLista(String nomeArquivo) {
         List<Cliente> clientes = new LinkedList<>();
         try {
