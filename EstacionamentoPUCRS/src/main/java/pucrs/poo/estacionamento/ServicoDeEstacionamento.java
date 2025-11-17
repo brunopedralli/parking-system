@@ -60,7 +60,7 @@ public class ServicoDeEstacionamento {
         Duration dt = Duration.between(horarioEntrada, horarioSaida);
         long minutosTotais = dt.toMinutes();
 
-        if (minutosTotais < 15) {
+        if (minutosTotais > 15) {
             Cliente cli = cadClientes.getPorPlaca(placa);
             cli.calculaCusto(horarioEntrada, horarioSaida);        
         }
