@@ -15,6 +15,11 @@ public class Tecnopuc extends Cliente {
         return this.debitos;
     }
 
+    @Override
+    public String getTipo() {
+        return "Tecnopuc";
+    }
+
     public void abateDebito(int valor) {
         this.debitos -= valor;
     }

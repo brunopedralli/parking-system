@@ -89,7 +89,7 @@ public class CadastroVaadin extends VerticalLayout {
         HorizontalLayout botoesLayout = new HorizontalLayout(salvarButton, cancelarButton);
 
         grid.setItems(cadClientes.getLista());
-        grid.setColumns("nome", "cpf", "celular");
+        grid.setColumns("nome", "cpf", "celular", "tipo");
 
         add(formLayout, botoesLayout, new H2("Usuários Cadastrados"), grid);
         add(new Hr());

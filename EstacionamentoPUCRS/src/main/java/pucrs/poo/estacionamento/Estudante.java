@@ -20,6 +20,11 @@ public class Estudante extends Cliente {
         return this.creditos;
     }
 
+    @Override
+    public String getTipo() {
+        return "Estudante";
+    }
+
     public boolean adicionaCreditos(int creditos) {
         if (valoresRecarga.contains(creditos)) {
             this.creditos += creditos;

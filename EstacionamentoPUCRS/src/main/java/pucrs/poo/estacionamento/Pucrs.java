@@ -9,6 +9,11 @@ public class Pucrs extends Cliente {
     }
 
     @Override
+    public String getTipo() {
+        return "Funcionário PUCRS";
+    }
+
+    @Override
     public void cadastraVeiculo(String placa) {
         if (super.getVeiculos().size() < 2)
             super.getVeiculos().add(placa);
