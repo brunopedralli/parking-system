@@ -20,7 +20,7 @@ public class MainView extends VerticalLayout {
       add(sayHelloButton);
       add(new Hr());
 
-      add(new RouterLink("Cadastro de Clientes", Cadastro.class));
+      add(new RouterLink("Cadastro de clientes", Cadastro.class));
       add(new RouterLink("Financeiro", Financeiro.class));
       add(new RouterLink("Estacionamento", Estacionamento.class));
    }

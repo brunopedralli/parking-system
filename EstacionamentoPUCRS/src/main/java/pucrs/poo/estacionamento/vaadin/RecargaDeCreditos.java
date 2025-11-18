@@ -27,7 +27,7 @@ import pucrs.poo.estacionamento.modelo.Cliente;
 import pucrs.poo.estacionamento.modelo.Estudante;
 
 @PageTitle("Recarga de Créditos")
-@Route("finaceiro/recarga-de-creditos")
+@Route("financeiro/recarga-de-creditos")
 public class RecargaDeCreditos extends VerticalLayout {
     private final CadastroClientes cadClientes;
     private final TextField nome;
