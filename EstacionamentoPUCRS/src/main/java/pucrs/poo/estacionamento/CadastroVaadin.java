@@ -97,7 +97,7 @@ public class CadastroVaadin extends VerticalLayout {
         add(new Hr());
         
         Button backButton = new Button("Voltar");
-        backButton.addClickListener(e -> UI.getCurrent().navigate("hello"));
+        backButton.addClickListener(e -> UI.getCurrent().navigate(""));
         add(backButton);
     }
 
