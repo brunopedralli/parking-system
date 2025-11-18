@@ -35,7 +35,7 @@ public abstract class Cliente {
 
     public void setVeiculos(String anterior, String novo) {
         this.veiculos.remove(anterior);
-        this.veiculos.add(novo);
+        if (novo != null) this.veiculos.add(novo);
     }
 
     public abstract void cadastraVeiculo(String placa);
