@@ -32,7 +32,7 @@ import pucrs.poo.estacionamento.modelo.Tecnopuc;
 
 @PageTitle("Cadastro de Clientes")
 @Route("cadastro-de-clientes")
-public class CadastroVaadin extends VerticalLayout {
+public class Cadastro extends VerticalLayout {
     private final CadastroClientes cadClientes;
     private final TextField nome;
     private final TextField cpf;
@@ -43,7 +43,7 @@ public class CadastroVaadin extends VerticalLayout {
     private final Checkbox aceitaTermos;
     private final Grid<Cliente> grid;
 
-    public CadastroVaadin() {
+    public Cadastro() {
         cadClientes = CadastroClientes.getInstance();
         nome = new TextField("Nome");
         cpf = new TextField("CPF");
