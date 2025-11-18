@@ -9,15 +9,16 @@ import com.vaadin.flow.router.RouterLink;
 
 @Route("")
 public class MainView extends VerticalLayout {
-    public MainView() {
-       Button sayHelloButton = new Button("Say hello");
-       sayHelloButton.addClickListener(e -> {
+   public MainView() {
+      Button sayHelloButton = new Button("Say hello");
+      sayHelloButton.addClickListener(e -> {
              Notification.show("Hello world!");
-       });
-       add(sayHelloButton);
+      });
 
-       add(new Hr());
+      add(sayHelloButton);
+      add(new Hr());
 
-    add(new RouterLink("Cadastro de Clientes", CadastroVaadin.class));
+      add(new RouterLink("Cadastro de Clientes", CadastroVaadin.class));
+      add(new RouterLink("Recarga de Créditos", RecargaDeCreditos.class));
    }
 }
