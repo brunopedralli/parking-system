@@ -1,6 +1,5 @@
 package pucrs.poo.estacionamento.modelo;
 
-import pucrs.poo.estacionamento.vaadin.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -32,6 +31,11 @@ public abstract class Cliente {
 
     public Set<String> getVeiculos() {
         return veiculos;
+    }
+
+    public void setVeiculos(String anterior, String novo) {
+        this.veiculos.remove(anterior);
+        this.veiculos.add(novo);
     }
 
     public abstract void cadastraVeiculo(String placa);
