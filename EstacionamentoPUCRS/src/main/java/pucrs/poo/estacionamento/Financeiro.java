@@ -10,7 +10,6 @@ public class Financeiro extends VerticalLayout {
     public Financeiro() {
         add(new Hr());
 
-        add(new RouterLink("Cadastro de Clientes", CadastroVaadin.class));
         add(new RouterLink("Recarga de Créditos", RecargaDeCreditos.class));
     }
 }
