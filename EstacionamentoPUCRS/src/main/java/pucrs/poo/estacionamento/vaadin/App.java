@@ -1,6 +1,5 @@
-package pucrs.poo.estacionamento.modelo;
+package pucrs.poo.estacionamento.vaadin;
 
-import pucrs.poo.estacionamento.vaadin.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
