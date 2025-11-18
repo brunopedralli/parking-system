@@ -58,11 +58,13 @@ public class CadastroVaadin extends VerticalLayout {
                 creditos.setVisible(true);
                 debitos.setVisible(false);
                 debitos.clear();
-            } else if ("Tecnopuc".equals(valor)) {
+            } 
+            else if ("Tecnopuc".equals(valor)) {
                 debitos.setVisible(true);
                 creditos.setVisible(false);
                 creditos.clear();
-            } else {
+            } 
+            else {
                 creditos.setVisible(false);
                 creditos.clear();
                 debitos.setVisible(false);
