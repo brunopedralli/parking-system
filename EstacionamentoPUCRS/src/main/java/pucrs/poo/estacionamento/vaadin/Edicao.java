@@ -115,6 +115,8 @@ public class Edicao extends VerticalLayout {
         cpf.setValue(c.getCpf());
         celular.setValue(c.getCelular());
         veiculos.setItems(c.getVeiculos());
+        veiculos.setReadOnly(false);
+        novoVeiculo.setReadOnly(false);
     }
 
     private void habilitarFormulario(boolean opcao) {
