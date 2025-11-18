@@ -114,24 +114,27 @@ public class CadastroVaadin extends VerticalLayout {
 
         String tipo = tipoUsuario.getValue();
         Cliente c;
+        
         if (tipo.equals("Estudante")) {
             int cred = (creditos.getValue() == null) ? 0 : creditos.getValue();
             c = new Estudante(cpf.getValue(),
-                                    nome.getValue(),
-                                    celular.getValue(),
-                                    cred);
+                                nome.getValue(),
+                                celular.getValue(),
+                                cred);
 
-        } else if (tipo.equals("Tecnopuc")) {
+        } 
+        else if (tipo.equals("Tecnopuc")) {
             double deb = (debitos.getValue() == null) ? 0 : debitos.getValue();
             c = new Tecnopuc(cpf.getValue(),
-                                    nome.getValue(),
-                                    celular.getValue(),
-                                    deb);
-
-        } else {
-            c = new Pucrs(cpf.getValue(),
                                 nome.getValue(),
-                                celular.getValue());
+                                celular.getValue(),
+                                deb);
+
+        } 
+        else {
+            c = new Pucrs(cpf.getValue(),
+                            nome.getValue(),
+                            celular.getValue());
         }
 
         cadClientes.add(c);
