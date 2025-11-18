@@ -6,21 +6,34 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
+
 public class ServicoDeEstacionamento {
+    private static ServicoDeEstacionamento instance;
     private final int vagasTotais = 500;
     private int ocupacao;
     private Map<String, LocalDateTime> veiculosEstacionados;
     private CadastroClientes cadClientes;
 
-    public ServicoDeEstacionamento(CadastroClientes cadClientes) {
-        this.cadClientes = cadClientes;
+    public ServicoDeEstacionamento getInstance() {
+        if (instance == null) {
+            instance = new ServicoDeEstacionamento();
+        }
+
+        return instance;
+    }
+
+    private ServicoDeEstacionamento() {
+        this.cadClientes = CadastroClientes.getInstance();
         this.veiculosEstacionados = this.carregaDeEntradasMap("entradas.dat");
         this.ocupacao = 0;
     }
     
     public void entrada(String placa, LocalDateTime horarioEntrada) {
         if (ocupacao >= vagasTotais) {
-            System.out.print("Entrada recusada, pois o estacionamento já está lotado. Pedimos perdão pela inconveniência.");
+            Notification.show("Entrada recusada, pois o estacionamento já está lotado. Pedimos perdão pela inconveniência.", 3000, Notification.Position.TOP_CENTER)
+                            .addThemeVariants(NotificationVariant.LUMO_ERROR);            
             return;
         }
 
@@ -29,7 +42,8 @@ public class ServicoDeEstacionamento {
             Set<String> veiculos = cli.getVeiculos();
             for (String s : veiculos) {
                 if (veiculosEstacionados.containsKey(s)) {
-                    System.out.print("Entrada recusada, pois o cliente já possui outro veículo no estacionamento.");
+                    Notification.show("Entrada recusada, pois o cliente já possui outro veículo no estacionamento.", 3000, Notification.Position.TOP_CENTER)
+                            .addThemeVariants(NotificationVariant.LUMO_ERROR); 
                     return;
                 }
             }
@@ -39,10 +53,12 @@ public class ServicoDeEstacionamento {
             Estudante aluno = (Estudante) cli;
             int cred = aluno.getCreditos();
             if (cred < -15) {
-                    System.out.print("Entrada recusada, por insuficiência de créditos.");
+                    Notification.show("Entrada recusada, por insuficiência de créditos.", 3000, Notification.Position.TOP_CENTER)
+                            .addThemeVariants(NotificationVariant.LUMO_ERROR);
                     return;
             } else if (cred < 0) {
-                System.out.printf("Atenção! Você está com saldo devedor de: R$%.2f", (double) Math.abs(cred));
+                Notification.show(String.format("Atenção! Você está com saldo devedor de: R$%.2f", (double) Math.abs(cred)), 3000, Notification.Position.TOP_CENTER)
+                            .addThemeVariants(NotificationVariant.LUMO_ERROR);
             }
         }
 
@@ -52,7 +68,8 @@ public class ServicoDeEstacionamento {
 
     public boolean saida(String placa, LocalDateTime horarioSaida) {
         if (!this.veiculosEstacionados.containsKey(placa)) {
-            System.out.print("Houve um erro no sistema. Pedimos perdão pela inconveniência.");
+            Notification.show("Houve um erro no sistema. Pedimos perdão pela inconveniência", 3000, Notification.Position.TOP_CENTER)
+                            .addThemeVariants(NotificationVariant.LUMO_ERROR);
             return false;
         }
 
