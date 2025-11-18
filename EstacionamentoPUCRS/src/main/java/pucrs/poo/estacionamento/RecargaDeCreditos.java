@@ -33,8 +33,8 @@ public class RecargaDeCreditos extends VerticalLayout {
     private final ComboBox<Integer> creditosAdd;
     private final Button salvarButton;
     private final Button cancelarButton;
-    private final Grid<Cliente> grid;
-    Cliente clienteSelecionado;
+    private final Grid<Estudante> grid;
+    Estudante estudanteSelecionado;
 
     public RecargaDeCreditos() {
         cadClientes = CadastroClientes.getInstance();
@@ -54,7 +54,7 @@ public class RecargaDeCreditos extends VerticalLayout {
         creditosAdd = new ComboBox<>("Recarga");
         creditosAdd.setItems(15, 50, 100, 150);
 
-        grid = new Grid<>(Cliente.class);
+        grid = new Grid<>(Estudante.class);
 
         setSpacing(true);
         setPadding(true);
@@ -76,10 +76,11 @@ public class RecargaDeCreditos extends VerticalLayout {
 
         grid.setItems(cadClientes.getLista().stream()
                                             .filter((Cliente c) -> c instanceof Estudante)
+                                            .map((Cliente c) -> (Estudante) c)
                                             .toList());
 
         grid.setColumns("nome", "cpf", "celular", "creditos");
-        grid.asSingleSelect().addValueChangeListener(event -> preparaEdicaoCliente(event));
+        grid.asSingleSelect().addValueChangeListener(event -> preparaEdicaoEstudante(event));
 
         add(formLayout, botoesLayout, new H2("Estudantes Cadastrados"), grid);
         add(new Hr());
@@ -108,9 +109,7 @@ public class RecargaDeCreditos extends VerticalLayout {
         habilitarFormulario(false);
     }
 
-    private void preencherFormulario(Cliente c) {
-        Estudante e = (Estudante) c;
-
+    private void preencherFormulario(Estudante e) {
         nome.setValue(e.getNome());
         cpf.setValue(e.getCpf());
         celular.setValue(e.getCelular());
@@ -123,11 +122,11 @@ public class RecargaDeCreditos extends VerticalLayout {
         cancelarButton.setEnabled(opcao);
     }
 
-    private void preparaEdicaoCliente(ComponentValueChangeEvent<Grid<Cliente>, Cliente> event) {
-        clienteSelecionado = event.getValue();
+    private void preparaEdicaoEstudante(ComponentValueChangeEvent<Grid<Estudante>, Estudante> event) {
+        estudanteSelecionado = event.getValue();
 
-        if (clienteSelecionado != null) {
-            preencherFormulario(clienteSelecionado);
+        if (estudanteSelecionado != null) {
+            preencherFormulario(estudanteSelecionado);
             habilitarFormulario(true);
         } 
         else {
