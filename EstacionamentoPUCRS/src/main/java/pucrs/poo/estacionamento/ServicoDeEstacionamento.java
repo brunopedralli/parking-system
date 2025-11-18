@@ -33,7 +33,7 @@ public class ServicoDeEstacionamento {
     public void entrada(String placa, LocalDateTime horarioEntrada) {
         if (ocupacao >= vagasTotais) {
             Notification.show("Entrada recusada, pois o estacionamento já está lotado. Pedimos perdão pela inconveniência.", 3000, Notification.Position.TOP_CENTER)
-                            .addThemeVariants(NotificationVariant.LUMO_ERROR);            
+                        .addThemeVariants(NotificationVariant.LUMO_ERROR);            
             return;
         }
 
@@ -43,7 +43,7 @@ public class ServicoDeEstacionamento {
             for (String s : veiculos) {
                 if (veiculosEstacionados.containsKey(s)) {
                     Notification.show("Entrada recusada, pois o cliente já possui outro veículo no estacionamento.", 3000, Notification.Position.TOP_CENTER)
-                            .addThemeVariants(NotificationVariant.LUMO_ERROR); 
+                                .addThemeVariants(NotificationVariant.LUMO_ERROR); 
                     return;
                 }
             }
@@ -54,7 +54,7 @@ public class ServicoDeEstacionamento {
             int cred = aluno.getCreditos();
             if (cred < -15) {
                     Notification.show("Entrada recusada, por insuficiência de créditos.", 3000, Notification.Position.TOP_CENTER)
-                            .addThemeVariants(NotificationVariant.LUMO_ERROR);
+                                .addThemeVariants(NotificationVariant.LUMO_ERROR);
                     return;
             } else if (cred < 0) {
                 Notification.show(String.format("Atenção! Você está com saldo devedor de: R$%.2f", (double) Math.abs(cred)), 3000, Notification.Position.TOP_CENTER)
@@ -69,7 +69,7 @@ public class ServicoDeEstacionamento {
     public boolean saida(String placa, LocalDateTime horarioSaida) {
         if (!this.veiculosEstacionados.containsKey(placa)) {
             Notification.show("Houve um erro no sistema. Pedimos perdão pela inconveniência", 3000, Notification.Position.TOP_CENTER)
-                            .addThemeVariants(NotificationVariant.LUMO_ERROR);
+                        .addThemeVariants(NotificationVariant.LUMO_ERROR);
             return false;
         }
 
@@ -84,6 +84,9 @@ public class ServicoDeEstacionamento {
 
         veiculosEstacionados.remove(placa);
         ocupacao--;
+
+        Notification.show("Você saiu com seu veículo com sucesso!", 3000, Notification.Position.TOP_CENTER)
+                    .addThemeVariants(NotificationVariant.LUMO_ERROR);
 
         return true;
     }
