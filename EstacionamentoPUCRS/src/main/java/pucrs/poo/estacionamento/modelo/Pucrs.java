@@ -1,5 +1,6 @@
-package pucrs.poo.estacionamento;
+package pucrs.poo.estacionamento.modelo;
 
+import pucrs.poo.estacionamento.vaadin.*;
 import java.time.LocalDateTime;
 
 public class Pucrs extends Cliente {

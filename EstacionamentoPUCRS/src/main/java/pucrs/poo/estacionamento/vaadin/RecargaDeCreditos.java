@@ -1,5 +1,6 @@
-package pucrs.poo.estacionamento;
+package pucrs.poo.estacionamento.vaadin;
 
+import pucrs.poo.estacionamento.modelo.*;
 import com.vaadin.flow.component.AbstractField.ComponentValueChangeEvent;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.UI;
@@ -21,6 +22,10 @@ import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+
+import pucrs.poo.estacionamento.modelo.CadastroClientes;
+import pucrs.poo.estacionamento.modelo.Cliente;
+import pucrs.poo.estacionamento.modelo.Estudante;
 
 @PageTitle("Recarga de Créditos")
 @Route("finaceiro/recarga-de-creditos")

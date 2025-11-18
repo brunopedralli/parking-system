@@ -1,5 +1,6 @@
-package pucrs.poo.estacionamento;
+package pucrs.poo.estacionamento.modelo;
 
+import pucrs.poo.estacionamento.vaadin.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;

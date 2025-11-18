@@ -1,5 +1,6 @@
-package pucrs.poo.estacionamento;
+package pucrs.poo.estacionamento.vaadin;
 
+import pucrs.poo.estacionamento.modelo.*;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -22,6 +23,12 @@ import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+
+import pucrs.poo.estacionamento.modelo.CadastroClientes;
+import pucrs.poo.estacionamento.modelo.Cliente;
+import pucrs.poo.estacionamento.modelo.Estudante;
+import pucrs.poo.estacionamento.modelo.Pucrs;
+import pucrs.poo.estacionamento.modelo.Tecnopuc;
 
 @PageTitle("Cadastro de Clientes")
 @Route("cadastro-de-clientes")
