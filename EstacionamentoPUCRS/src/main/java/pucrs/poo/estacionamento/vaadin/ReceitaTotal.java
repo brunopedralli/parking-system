@@ -135,11 +135,16 @@ public class ReceitaTotal extends VerticalLayout {
 
         int y = ano.getValue();
 
-        double total = regHistorico.getRegistros().stream()
+
+        List<Historico> lista = regHistorico.getRegistros().stream()
                                                 .filter((Historico h) -> h.getDataEntrada().getMonthValue() == m)
                                                 .filter((Historico h) -> h.getDataEntrada().getYear() == y)
-                                                .mapToDouble((Historico h) -> h.getCusto())
-                                                .sum();
+                                                .toList();
+
+        grid.setItems(lista);
+        double total = lista.stream()
+                            .mapToDouble((Historico h) -> h.getCusto())
+                            .sum();
 
         String mensagem = "A receita do estacionamento no período foi de: R$" + String.format("%.2f", total);
         Notification.show(mensagem, 3000, Notification.Position.BOTTOM_STRETCH)
