@@ -43,7 +43,7 @@ public class TotalEntradas extends VerticalLayout {
         regHistorico = RegistroHistorico.getInstance();
 
         tipoUsuario = new ComboBox<>("Tipo de Usuário");
-        tipoUsuario.setItems("Estudate", "Funcionário", "Tecnopuc");
+        tipoUsuario.setItems("Estudante", "Tecnopuc", "Funcionário");
 
         dataInicial = new DateTimePicker("Data inicial");
         dataFinal = new DateTimePicker("Data final");
@@ -111,7 +111,7 @@ public class TotalEntradas extends VerticalLayout {
 
         grid.getDataProvider().refreshAll();
         limparFormulario();
-        habilitarFormulario(false);
+        habilitarFormulario(true);
     }
 
     private void habilitarFormulario(boolean opcao) {
