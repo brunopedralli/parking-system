@@ -11,6 +11,7 @@ import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.html.Hr;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -34,12 +35,15 @@ public class Estacionamento extends VerticalLayout {
     private final Map<String, LocalDateTime> entradas;
     private final Grid<Map.Entry<String, LocalDateTime>> grid;
     private final TextField placa;
+    private final H4 ocupacao;
 
     public Estacionamento() {
         cadClientes = CadastroClientes.getInstance();
         gerEstacionamento = ServicoDeEstacionamento.getInstance();
         entradas = gerEstacionamento.getEstacionamento();
         placa = new TextField("Placa");
+        ocupacao = new H4();
+        atualizarOcupacao();
 
         grid = new Grid<>();
         grid.setItems(entradas.entrySet());
@@ -69,7 +73,7 @@ public class Estacionamento extends VerticalLayout {
 
         HorizontalLayout botoesLayout = new HorizontalLayout(entrar, sair, cancelarButton);
 
-        add(formLayout, botoesLayout, new H2("Estacionamento"), grid);
+        add(formLayout, botoesLayout, new H2("Estacionamento"), ocupacao, grid);
         add(new Hr());
         
         Button backButton = new Button("Voltar");
@@ -83,8 +87,12 @@ public class Estacionamento extends VerticalLayout {
         
         Cliente c = cadClientes.getPorPlaca(veiculo);
         boolean entrou = gerEstacionamento.entrada(veiculo, LocalDateTime.now());
-        if (entrou) Notification.show("Usuário " + c.getNome() + " entrou no estacionamento com sucesso!", 3000, Notification.Position.BOTTOM_STRETCH)
+        
+        if (entrou) {
+            Notification.show("Usuário " + c.getNome() + " entrou no estacionamento com sucesso!", 3000, Notification.Position.BOTTOM_STRETCH)
                                 .addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+            atualizarOcupacao();
+        }
 
         grid.getDataProvider().refreshAll();
         limparFormulario();
@@ -96,8 +104,12 @@ public class Estacionamento extends VerticalLayout {
 
         Cliente c = cadClientes.getPorPlaca(veiculo);
         boolean saiu = gerEstacionamento.saida(veiculo, LocalDateTime.now());
-        if (saiu) Notification.show("Cliente " + c.getNome() + " saiu do estacionamento com sucesso!", 3000, Notification.Position.BOTTOM_STRETCH)
-                              .addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+
+        if (saiu) {
+            Notification.show("Cliente " + c.getNome() + " saiu do estacionamento com sucesso!", 3000, Notification.Position.BOTTOM_STRETCH)
+                        .addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+            atualizarOcupacao();
+        }
 
         grid.getDataProvider().refreshAll();
         limparFormulario();
@@ -120,6 +132,11 @@ public class Estacionamento extends VerticalLayout {
         }
 
         return true;
+    }
+
+    private void atualizarOcupacao() {
+        int total = gerEstacionamento.getOcupacao();
+        ocupacao.setText("Total de veículos no estacionamento: " + total);
     }
 
     private void limparFormulario() {

@@ -34,6 +34,10 @@ public class ServicoDeEstacionamento {
     public Map<String, LocalDateTime> getEstacionamento() {
         return veiculosEstacionados;
     }
+
+    public int getOcupacao() {
+        return this.ocupacao;
+    }
     
     public boolean entrada(String placa, LocalDateTime horarioEntrada) {
         if (ocupacao >= vagasTotais) {
