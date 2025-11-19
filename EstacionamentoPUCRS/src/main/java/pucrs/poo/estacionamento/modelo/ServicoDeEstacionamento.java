@@ -35,11 +35,11 @@ public class ServicoDeEstacionamento {
         return veiculosEstacionados;
     }
     
-    public void entrada(String placa, LocalDateTime horarioEntrada) {
+    public boolean entrada(String placa, LocalDateTime horarioEntrada) {
         if (ocupacao >= vagasTotais) {
             Notification.show("Entrada recusada, pois o estacionamento já está lotado. Pedimos perdão pela inconveniência.", 3000, Notification.Position.TOP_CENTER)
                         .addThemeVariants(NotificationVariant.LUMO_ERROR);            
-            return;
+            return false;
         }
 
         Cliente cli = cadClientes.getPorPlaca(placa);
@@ -49,7 +49,7 @@ public class ServicoDeEstacionamento {
                 if (veiculosEstacionados.containsKey(s)) {
                     Notification.show("Entrada recusada, pois o cliente já possui outro veículo no estacionamento.", 3000, Notification.Position.TOP_CENTER)
                                 .addThemeVariants(NotificationVariant.LUMO_ERROR); 
-                    return;
+                    return false;
                 }
             }
         }
@@ -60,7 +60,7 @@ public class ServicoDeEstacionamento {
             if (cred < -15) {
                     Notification.show("Entrada recusada, por insuficiência de créditos.", 3000, Notification.Position.TOP_CENTER)
                                 .addThemeVariants(NotificationVariant.LUMO_ERROR);
-                    return;
+                    return false;
             } else if (cred < 0) {
                 Notification.show(String.format("Atenção! Você está com saldo devedor de: R$%.2f", (double) Math.abs(cred)), 3000, Notification.Position.TOP_CENTER)
                             .addThemeVariants(NotificationVariant.LUMO_ERROR);
@@ -69,6 +69,7 @@ public class ServicoDeEstacionamento {
 
         veiculosEstacionados.put(placa, horarioEntrada);
         ocupacao++;
+        return true;
     }
 
     public boolean saida(String placa, LocalDateTime horarioSaida) {

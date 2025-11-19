@@ -89,26 +89,45 @@ public class Estacionamento extends VerticalLayout {
         boolean placaVazia = veiculo == null || veiculo.isEmpty();
 
         if (placaVazia) {
-            Notification.show("Insira o veículo que deseja adentrar ou sair do estacionamento", 3000, Notification.Position.TOP_CENTER)
+            Notification.show("Insira o veículo que deseja adentrar ao estacionamento", 3000, Notification.Position.TOP_CENTER)
                         .addThemeVariants(NotificationVariant.LUMO_ERROR); 
             return;
         }
         
         Cliente c = cadClientes.getPorPlaca(veiculo);
-            
-        String mensagem = "Usuário " + c.getNome() + " salvo com sucesso!";
-        Notification.show(mensagem, 3000, Notification.Position.BOTTOM_STRETCH);
+        if (c == null) {
+            Notification.show("Não existem clientes cadastrados com a placa informada", 3000, Notification.Position.TOP_CENTER)
+                        .addThemeVariants(NotificationVariant.LUMO_ERROR); 
+            return;
+        }
+        
+        boolean entrou = gerEstacionamento.entrada(veiculo, LocalDateTime.now());
+        if (entrou) Notification.show("Usuário " + c.getNome() + " entrou no estacionamento com sucesso!", 3000, Notification.Position.BOTTOM_STRETCH);
+
+        grid.getDataProvider().refreshAll();
+        limparFormulario();
+    }
+
+    private void sair() {
+        String veiculo = placa.getValue();
+        boolean placaVazia = veiculo == null || veiculo.isEmpty();
+
+        if (placaVazia) {
+            Notification.show("Insira o veículo com o qual deseja sair estacionamento", 3000, Notification.Position.TOP_CENTER)
+                        .addThemeVariants(NotificationVariant.LUMO_ERROR); 
+            return;
+        }
+        
+        boolean saiu = gerEstacionamento.saida(veiculo, LocalDateTime.now());
+        if (saiu) Notification.show("Veículo " + veiculo + "saiu no estacionamento com sucesso!", 3000, Notification.Position.BOTTOM_STRETCH);
 
         grid.getDataProvider().refreshAll();
         limparFormulario();
     }
 
     private void limparFormulario() {
-        nome.clear();
-        cpf.clear();
-        celular.clear();
-        tipoUsuario.clear();
-        nome.focus();
+        placa.clear();
+        placa.focus();
     }
 
     private Dialog criaDialogoDeCancelamento() {
@@ -123,47 +142,5 @@ public class Estacionamento extends VerticalLayout {
         Button fecharDialogo = new Button("Não", e -> dialogo.close());
         dialogo.getFooter().add(fecharDialogo, confirmarCancelamento);
         return dialogo;
-    }
-    
-    public void Entrada() {
-        TextField placaField = new TextField("Placa do Veículo");
-        Button entrarButton = new Button("Registrar Entrada");
-
-        entrarButton.addClickListener(e -> {
-        String placa = placaField.getValue().trim().toUpperCase();
-
-        if (placa.isEmpty() || placa.length() < 7) { 
-            Notification.show("Por favor, insira uma placa válida (mínimo 7 caracteres).", 3000, Notification.Position.MIDDLE);
-            return;
-        }
-        try {
-        Notification.show("Veículo " + placa + " entrou no estacionamento com sucesso!", 3000, Notification.Position.MIDDLE);
-            placaField.setValue("");
-        } catch (Exception ex) {
-            Notification.show(" ERRO ao registrar entrada: " + ex.getMessage(), 5000, Notification.Position.MIDDLE);
-        }
-    });
-        add(placaField, entrarButton);
-    }
-
-    public void Saida() {
-        TextField placaField = new TextField("Placa do Veículo");
-        Button sairButton = new Button("Registrar Saída");
-
-        sairButton.addClickListener(e -> {
-        String placa = placaField.getValue().trim().toUpperCase();
-
-        if (placa.isEmpty() || placa.length() < 7) { 
-            Notification.show("Por favor, insira uma placa válida (mínimo 7 caracteres).", 3000, Notification.Position.MIDDLE);
-            return;
-        }
-        try {
-        Notification.show("Veículo " + placa + " saiu do estacionamento com sucesso!", 3000, Notification.Position.MIDDLE);
-            placaField.setValue("");
-        } catch (Exception ex) {
-            Notification.show(" ERRO ao registrar saída: " + ex.getMessage(), 5000, Notification.Position.MIDDLE);
-        }
-    });
-        add(placaField, sairButton);
     }
 }
