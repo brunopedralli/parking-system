@@ -98,6 +98,12 @@ public class TotalEntradas extends VerticalLayout {
             return;
         }
 
+        if (dataI.isAfter(dataF)) {
+            Notification.show("Selecione um intervalo de datas válido", 3000, Notification.Position.TOP_CENTER)
+                        .addThemeVariants(NotificationVariant.LUMO_ERROR); 
+            return;
+        }
+
         List<Historico> lista = regHistorico.getRegistros().stream()
                                                 .filter((Historico h) -> cadClientes.getPorPlaca(h.getPlaca()).getTipo().equals(tipo))
                                                 .filter((Historico h) -> h.getDataEntrada().isAfter(dataI))
@@ -124,6 +130,7 @@ public class TotalEntradas extends VerticalLayout {
 
     private void limparFormulario() {
         grid.asSingleSelect().clear();
+        grid.setItems(regHistorico.getRegistros());
         tipoUsuario.clear();
         dataInicial.clear();
         dataFinal.clear();
