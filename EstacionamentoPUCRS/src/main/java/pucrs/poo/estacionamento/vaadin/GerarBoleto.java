@@ -6,16 +6,13 @@ import com.vaadin.flow.component.html.Hr;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.router.RouterLink;
 
-@PageTitle("Gerencial")
-@Route("gerencial")
-public class Gerencial extends VerticalLayout {
-    public Gerencial() {
+@PageTitle("Gerar Boleto")
+@Route("finaceiro/gerar-boleto")
+public class GerarBoleto extends VerticalLayout {
+    public GerarBoleto() {
         add(new Hr());
-        add(new RouterLink("Relatorio de Uso", RelatorioUso.class));
-        add(new RouterLink("Total de Entradas", TotalEntradas.class));
-        
+
         Button backButton = new Button("Voltar");
         backButton.addClickListener(e -> UI.getCurrent().navigate(""));
         add(backButton);
