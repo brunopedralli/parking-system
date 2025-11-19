@@ -6,6 +6,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
+
 public class Estudante extends Cliente {
     private int creditos;
     private static final Set<Integer> valoresRecarga = new HashSet<>(
@@ -37,8 +40,12 @@ public class Estudante extends Cliente {
 
     @Override
     public void cadastraVeiculo(String placa) {
-        if (super.getVeiculos().size() < 2)
+        if (super.getVeiculos().size() < 2) {
             super.getVeiculos().add(placa);
+        } else {
+            Notification.show("O cliente não é permitido a adicionar mais veículos.", 3000, Notification.Position.TOP_CENTER)
+                        .addThemeVariants(NotificationVariant.LUMO_ERROR); 
+        }
     }
 
     @Override
