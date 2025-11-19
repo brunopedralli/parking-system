@@ -24,5 +24,6 @@ public class MainView extends VerticalLayout {
       add(new RouterLink("Atualização de Clientes", Edicao.class));
       add(new RouterLink("Financeiro", Financeiro.class));
       add(new RouterLink("Estacionamento", Estacionamento.class));
+      add(new RouterLink("Gerencial", Gerencial.class));
    }
 }
