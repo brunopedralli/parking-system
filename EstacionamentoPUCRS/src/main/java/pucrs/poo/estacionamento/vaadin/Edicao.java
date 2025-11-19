@@ -100,7 +100,12 @@ public class Edicao extends VerticalLayout {
         }
 
         Cliente c = cadClientes.getPorCpf(cpf.getValue());
-        c.setVeiculos(veiculos.getValue(), novoVeiculo.getValue());
+
+        if (novoVeiculo.getValue() == null) {
+            c.cadastraVeiculo(veiculos.getValue());
+        } else {
+            c.setVeiculos(veiculos.getValue(), novoVeiculo.getValue());
+        }
 
         String mensagem = "Veículo atualizado com sucesso!";
         Notification.show(mensagem, 3000, Notification.Position.BOTTOM_STRETCH);
