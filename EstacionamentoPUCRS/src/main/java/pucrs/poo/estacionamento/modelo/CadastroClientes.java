@@ -1,6 +1,5 @@
 package pucrs.poo.estacionamento.modelo;
 
-import pucrs.poo.estacionamento.vaadin.*;
 import java.util.LinkedList;
 import java.util.List;
 

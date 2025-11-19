@@ -17,14 +17,12 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 import pucrs.poo.estacionamento.modelo.CadastroClientes;
 import pucrs.poo.estacionamento.modelo.Cliente;
-import pucrs.poo.estacionamento.modelo.Estudante;
 
 @PageTitle("Atualização de Clientes")
 @Route("clientes/atualizacao")
