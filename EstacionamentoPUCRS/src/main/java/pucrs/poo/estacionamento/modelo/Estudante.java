@@ -11,7 +11,7 @@ import com.vaadin.flow.component.notification.NotificationVariant;
 
 public class Estudante extends Cliente {
     private int creditos;
-    public static final Set<Integer> valoresRecarga = new HashSet<>(
+    private static final Set<Integer> valoresRecarga = new HashSet<>(
         Arrays.asList(15, 50, 100, 150)
     );
 
@@ -27,6 +27,10 @@ public class Estudante extends Cliente {
     @Override
     public String getTipo() {
         return "Estudante";
+    }
+
+    public static Set<Integer> getValoresRecarga() {
+        return valoresRecarga;
     }
 
     public boolean adicionaCreditos(int creditos) {

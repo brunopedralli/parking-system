@@ -40,7 +40,7 @@ public class RecargaDeCreditos extends VerticalLayout {
     private final Button salvarButton;
     private final Button cancelarButton;
     private final Grid<Estudante> grid;
-    Set<Integer> valores = Estudante.valoresRecarga;
+    Set<Integer> valores = Estudante.getValoresRecarga();
     Estudante estudanteSelecionado;
 
     public RecargaDeCreditos() {
