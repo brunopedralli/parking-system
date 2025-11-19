@@ -96,11 +96,18 @@ public class Edicao extends VerticalLayout {
     private void atualizarCliente() {
         Cliente c = cadClientes.getPorCpf(cpf.getValue());
 
-        if (veiculos.getValue().isEmpty() && novoVeiculo.getValue().isEmpty()) {
+        String veiculoSelecionado = veiculos.getValue();
+        String novoVeiculoDigitado = novoVeiculo.getValue();
+
+        boolean semVeiculoSelecionado = veiculoSelecionado == null || veiculoSelecionado.isEmpty();
+        boolean semNovoVeiculo = novoVeiculoDigitado == null || novoVeiculoDigitado.isEmpty();
+
+        if (semVeiculoSelecionado && semNovoVeiculo) {
+            // Se VOCÊ QUER BLOQUEAR a atualização sem veículo, mantenha este erro:
             Notification.show("Selecione algum veículo para atualizar", 3000, Notification.Position.TOP_CENTER)
                         .addThemeVariants(NotificationVariant.LUMO_ERROR); 
             return;
-        }   
+        }
 
         if (veiculos.getValue().isEmpty()) {
             c.cadastraVeiculo(novoVeiculo.getValue());
