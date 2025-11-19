@@ -12,7 +12,8 @@ import com.vaadin.flow.router.Route;
 public class RelatorioUso extends VerticalLayout {
     public RelatorioUso() {
         add(new Hr());
-
+        
+        
         Button backButton = new Button("Voltar");
         backButton.addClickListener(e -> UI.getCurrent().navigate("gerencial"));
         add(backButton);
