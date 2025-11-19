@@ -34,11 +34,13 @@ public abstract class Cliente {
     }
 
     public void setVeiculos(String anterior, String novo) {
+        boolean semNovo = novo == null || novo.isEmpty();
+
         this.veiculos.remove(anterior);
-        if (novo != null) this.veiculos.add(novo);
+        if (!semNovo) this.veiculos.add(novo);
     }
 
-    public abstract void cadastraVeiculo(String placa);
+    public abstract boolean cadastraVeiculo(String placa);
     public abstract void calculaCusto(LocalDateTime chegada, LocalDateTime saida);
     public abstract String getTipo();
 }

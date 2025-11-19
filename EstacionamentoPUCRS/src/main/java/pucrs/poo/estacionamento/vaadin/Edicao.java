@@ -108,14 +108,15 @@ public class Edicao extends VerticalLayout {
             return;
         }
 
+        boolean atualizou = true;
         if (semAnterior) {
-            c.cadastraVeiculo(novoVeiculo.getValue());
+            atualizou = c.cadastraVeiculo(novoVeiculo.getValue());
         } 
         else {
             c.setVeiculos(veiculos.getValue(), novoVeiculo.getValue());
         }
 
-        Notification.show("Veículo atualizado com sucesso!", 3000, Notification.Position.BOTTOM_STRETCH);
+        if (atualizou) Notification.show("Veículo atualizado com sucesso!", 3000, Notification.Position.BOTTOM_STRETCH);
 
         grid.getDataProvider().refreshAll();
         limparFormulario();

@@ -39,12 +39,15 @@ public class Estudante extends Cliente {
     }
 
     @Override
-    public void cadastraVeiculo(String placa) {
+    public boolean cadastraVeiculo(String placa) {
         if (super.getVeiculos().size() < 2) {
             super.getVeiculos().add(placa);
-        } else {
+            return true;
+        } 
+        else {
             Notification.show("O cliente não é permitido a adicionar mais veículos.", 3000, Notification.Position.TOP_CENTER)
                         .addThemeVariants(NotificationVariant.LUMO_ERROR); 
+            return false;
         }
     }
 
