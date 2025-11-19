@@ -94,16 +94,18 @@ public class Edicao extends VerticalLayout {
     }
 
     private void atualizarCliente() {
-        if (veiculos.getValue() == null) {
-            Notification.show("Selecione algum veículo para atualizar", 3000, Notification.Position.TOP_CENTER)
-                        .addThemeVariants(NotificationVariant.LUMO_ERROR); 
-        }
-
         Cliente c = cadClientes.getPorCpf(cpf.getValue());
 
-        if (novoVeiculo.getValue() == null) {
-            c.cadastraVeiculo(veiculos.getValue());
-        } else {
+        if (veiculos.getValue() == null && novoVeiculo.getValue() == null) {
+            Notification.show("Selecione algum veículo para atualizar", 3000, Notification.Position.TOP_CENTER)
+                        .addThemeVariants(NotificationVariant.LUMO_ERROR); 
+            return;
+        }   
+
+        if (veiculos.getValue() == null) {
+            c.cadastraVeiculo(novoVeiculo.getValue());
+        } 
+        else {
             c.setVeiculos(veiculos.getValue(), novoVeiculo.getValue());
         }
 
