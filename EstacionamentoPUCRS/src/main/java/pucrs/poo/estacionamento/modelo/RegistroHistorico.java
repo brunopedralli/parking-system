@@ -10,15 +10,11 @@ public class RegistroHistorico {
         return dataEntrada;
     }
 
-    public void setDataEntrada(LocalDateTime dataEntrada) {
-        this.dataEntrada = dataEntrada;
-    }
-
     public LocalDateTime getDataSaida() {
         return dataSaida;
     }
-
-    public void setDataSaida(LocalDateTime dataSaida) {
+    public RegistroHistorico(LocalDateTime dataEntrada, LocalDateTime dataSaida) {
+        this.dataEntrada = dataEntrada;
         this.dataSaida = dataSaida;
     }
 }
