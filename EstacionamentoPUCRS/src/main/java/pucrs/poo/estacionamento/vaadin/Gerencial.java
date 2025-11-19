@@ -14,7 +14,7 @@ public class Gerencial extends VerticalLayout {
     public Gerencial() {
         add(new Hr());
         add(new RouterLink("Relatorio de uso", RelatorioUso.class));
-        add(new RouterLink("Total de entradas", TotalDeEntradas.class));
+        add(new RouterLink("Total de entradas", TotalEntradas.class));
         
         Button backButton = new Button("Voltar");
         backButton.addClickListener(e -> UI.getCurrent().navigate(""));

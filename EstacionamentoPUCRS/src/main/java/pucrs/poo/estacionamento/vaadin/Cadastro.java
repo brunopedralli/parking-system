@@ -31,7 +31,7 @@ import pucrs.poo.estacionamento.modelo.Pucrs;
 import pucrs.poo.estacionamento.modelo.Tecnopuc;
 
 @PageTitle("Cadastro de Clientes")
-@Route("cadastro-de-clientes")
+@Route("clientes/cadastro")
 public class Cadastro extends VerticalLayout {
     private final CadastroClientes cadClientes;
     private final TextField nome;

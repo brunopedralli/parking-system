@@ -27,7 +27,7 @@ import pucrs.poo.estacionamento.modelo.Cliente;
 import pucrs.poo.estacionamento.modelo.Estudante;
 
 @PageTitle("Atualização de Clientes")
-@Route("atualizacao-de-clientes")
+@Route("clientes/atualizacao")
 public class Edicao extends VerticalLayout {
     private final CadastroClientes cadClientes;
     private final TextField nome;
