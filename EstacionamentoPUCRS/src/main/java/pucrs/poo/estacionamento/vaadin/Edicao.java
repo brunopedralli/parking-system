@@ -96,13 +96,13 @@ public class Edicao extends VerticalLayout {
     private void atualizarCliente() {
         Cliente c = cadClientes.getPorCpf(cpf.getValue());
 
-        if (veiculos.getValue().equals("") && novoVeiculo.getValue().equals("")) {
+        if (veiculos.getValue().isEmpty() && novoVeiculo.getValue().isEmpty()) {
             Notification.show("Selecione algum veículo para atualizar", 3000, Notification.Position.TOP_CENTER)
                         .addThemeVariants(NotificationVariant.LUMO_ERROR); 
             return;
         }   
 
-        if (veiculos.getValue().equals("")) {
+        if (veiculos.getValue().isEmpty()) {
             c.cadastraVeiculo(novoVeiculo.getValue());
         } 
         else {
