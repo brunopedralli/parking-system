@@ -96,28 +96,26 @@ public class Edicao extends VerticalLayout {
     private void atualizarCliente() {
         Cliente c = cadClientes.getPorCpf(cpf.getValue());
 
-        String veiculoSelecionado = veiculos.getValue();
-        String novoVeiculoDigitado = novoVeiculo.getValue();
+        String anterior = veiculos.getValue();
+        String novo = novoVeiculo.getValue();
 
-        boolean semVeiculoSelecionado = veiculoSelecionado == null || veiculoSelecionado.isEmpty();
-        boolean semNovoVeiculo = novoVeiculoDigitado == null || novoVeiculoDigitado.isEmpty();
+        boolean semAnterior = anterior == null || anterior.isEmpty();
+        boolean semNovo = novo == null || novo.isEmpty();
 
-        if (semVeiculoSelecionado && semNovoVeiculo) {
-            // Se VOCÊ QUER BLOQUEAR a atualização sem veículo, mantenha este erro:
-            Notification.show("Selecione algum veículo para atualizar", 3000, Notification.Position.TOP_CENTER)
+        if (semAnterior && semNovo) {
+            Notification.show("Você deve selecionar um veículo para atualizar", 3000, Notification.Position.TOP_CENTER)
                         .addThemeVariants(NotificationVariant.LUMO_ERROR); 
             return;
         }
 
-        if (veiculos.getValue().isEmpty()) {
+        if (semAnterior) {
             c.cadastraVeiculo(novoVeiculo.getValue());
         } 
         else {
             c.setVeiculos(veiculos.getValue(), novoVeiculo.getValue());
         }
 
-        String mensagem = "Veículo atualizado com sucesso!";
-        Notification.show(mensagem, 3000, Notification.Position.BOTTOM_STRETCH);
+        Notification.show("Veículo atualizado com sucesso!", 3000, Notification.Position.BOTTOM_STRETCH);
 
         grid.getDataProvider().refreshAll();
         limparFormulario();
