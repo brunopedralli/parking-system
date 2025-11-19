@@ -90,7 +90,8 @@ public class Estacionamento extends VerticalLayout {
         
         Cliente c = cadClientes.getPorPlaca(veiculo);
         boolean entrou = gerEstacionamento.entrada(veiculo, LocalDateTime.now());
-        if (entrou) Notification.show("Usuário " + c.getNome() + " entrou no estacionamento com sucesso!", 3000, Notification.Position.BOTTOM_STRETCH);
+        if (entrou) Notification.show("Usuário " + c.getNome() + " entrou no estacionamento com sucesso!", 3000, Notification.Position.BOTTOM_STRETCH)
+                                .addThemeVariants(NotificationVariant.LUMO_SUCCESS);
 
         grid.getDataProvider().refreshAll();
         limparFormulario();
@@ -102,7 +103,8 @@ public class Estacionamento extends VerticalLayout {
 
         Cliente c = cadClientes.getPorPlaca(veiculo);
         boolean saiu = gerEstacionamento.saida(veiculo, LocalDateTime.now());
-        if (saiu) Notification.show("Cliente " + c.getNome() + " saiu do estacionamento com sucesso!", 3000, Notification.Position.BOTTOM_STRETCH);
+        if (saiu) Notification.show("Cliente " + c.getNome() + " saiu do estacionamento com sucesso!", 3000, Notification.Position.BOTTOM_STRETCH)
+                              .addThemeVariants(NotificationVariant.LUMO_SUCCESS);
 
         grid.getDataProvider().refreshAll();
         limparFormulario();

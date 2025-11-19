@@ -90,10 +90,6 @@ public class ServicoDeEstacionamento {
 
         veiculosEstacionados.remove(placa);
         ocupacao--;
-
-        Notification.show("Você saiu com seu veículo com sucesso!", 3000, Notification.Position.TOP_CENTER)
-                    .addThemeVariants(NotificationVariant.LUMO_ERROR);
-
         return true;
     }
 
