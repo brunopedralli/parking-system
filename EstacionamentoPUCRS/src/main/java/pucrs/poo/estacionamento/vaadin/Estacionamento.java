@@ -60,6 +60,5 @@ public class Estacionamento extends VerticalLayout {
         }
     });
         add(placaField, sairButton);
-        calculaCusto();
     }
 }
