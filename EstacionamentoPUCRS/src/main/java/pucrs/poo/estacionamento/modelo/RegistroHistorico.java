@@ -20,12 +20,8 @@ public class RegistroHistorico {
         this.registros = new ArrayList<>();
     }
 
-    public void add(String placa, LocalDateTime dataEntrada, LocalDateTime dataSaida) {
-        Historico h = new Historico(placa, dataEntrada, dataSaida);
-        this.registros.add(h);
-    }
-
-    public void add(Historico h) {
+    public void add(String placa, LocalDateTime dataEntrada, LocalDateTime dataSaida, double custo) {
+        Historico h = new Historico(placa, dataEntrada, dataSaida, custo);
         this.registros.add(h);
     }
 

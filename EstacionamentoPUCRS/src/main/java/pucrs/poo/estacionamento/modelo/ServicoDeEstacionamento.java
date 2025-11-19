@@ -88,14 +88,15 @@ public class ServicoDeEstacionamento {
         Duration dt = Duration.between(horarioEntrada, horarioSaida);
         long minutosTotais = dt.toMinutes();
 
+        double i = 0;
         if (minutosTotais > 15) {
             Cliente cli = cadClientes.getPorPlaca(placa);
-            cli.calculaCusto(horarioEntrada, horarioSaida);        
+            i = cli.calculaCusto(horarioEntrada, horarioSaida);        
         }
 
         veiculosEstacionados.remove(placa);
         ocupacao--;
-        regHistorico.add(placa, horarioEntrada, horarioSaida);
+        regHistorico.add(placa, horarioEntrada, horarioSaida, i);
         return true;
     }
 

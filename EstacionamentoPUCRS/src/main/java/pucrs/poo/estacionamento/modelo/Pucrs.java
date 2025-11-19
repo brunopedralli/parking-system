@@ -31,7 +31,7 @@ public class Pucrs extends Cliente {
     }
 
     @Override
-    public void calculaCusto(LocalDateTime chegada, LocalDateTime saida) {
-        return;
+    public double calculaCusto(LocalDateTime chegada, LocalDateTime saida) {
+        return 0;
     }
 }

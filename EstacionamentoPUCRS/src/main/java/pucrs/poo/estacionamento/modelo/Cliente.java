@@ -41,6 +41,6 @@ public abstract class Cliente {
     }
 
     public abstract boolean cadastraVeiculo(String placa);
-    public abstract void calculaCusto(LocalDateTime chegada, LocalDateTime saida);
+    public abstract double calculaCusto(LocalDateTime chegada, LocalDateTime saida);
     public abstract String getTipo();
 }

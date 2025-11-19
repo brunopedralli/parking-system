@@ -56,7 +56,8 @@ public class Estudante extends Cliente {
     }
 
     @Override
-    public void calculaCusto(LocalDateTime chegada, LocalDateTime saida) {
+    public double calculaCusto(LocalDateTime chegada, LocalDateTime saida) {
         this.creditos -= 15;
+        return 15;
     }
 }

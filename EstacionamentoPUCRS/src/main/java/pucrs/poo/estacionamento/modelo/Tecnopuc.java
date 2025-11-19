@@ -31,7 +31,7 @@ public class Tecnopuc extends Cliente {
     }
 
     @Override
-    public void calculaCusto(LocalDateTime chegada, LocalDateTime saida) {
+    public double calculaCusto(LocalDateTime chegada, LocalDateTime saida) {
         Duration dt = Duration.between(chegada, saida);
         long minutosTotais = dt.toMinutes();
 
@@ -39,5 +39,6 @@ public class Tecnopuc extends Cliente {
         double custo = horasCobraveis * 1.5;
 
         this.debitos += custo;
+        return custo;
     }
 }
