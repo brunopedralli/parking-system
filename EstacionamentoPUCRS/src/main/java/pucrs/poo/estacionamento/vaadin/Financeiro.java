@@ -15,7 +15,8 @@ public class Financeiro extends VerticalLayout {
         add(new Hr());
         add(new RouterLink("Recarga de Créditos", RecargaDeCreditos.class));
         add(new RouterLink("Receita Total", ReceitaTotal.class));
-
+        add(new RouterLink("Gerar Boleto", GerarBoleto.class));
+        
         Button backButton = new Button("Voltar");
         backButton.addClickListener(e -> UI.getCurrent().navigate(""));
         add(backButton);

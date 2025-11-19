@@ -42,7 +42,7 @@ public class ServicoDeEstacionamento {
     
     public boolean entrada(String placa, LocalDateTime horarioEntrada) {
         if (ocupacao >= vagasTotais) {
-            Notification.show("Entrada recusada, pois o estacionamento já está lotado. Pedimos perdão pela inconveniência.", 3000, Notification.Position.TOP_CENTER)
+            Notification.show("Entrada recusada, pois o estacionamento já está lotado. Pedimos perdão pela inconveniência", 3000, Notification.Position.TOP_CENTER)
                         .addThemeVariants(NotificationVariant.LUMO_ERROR);            
             return false;
         }
@@ -52,7 +52,7 @@ public class ServicoDeEstacionamento {
             Set<String> veiculos = cli.getVeiculos();
             for (String s : veiculos) {
                 if (veiculosEstacionados.containsKey(s)) {
-                    Notification.show("Entrada recusada, pois o cliente já possui outro veículo no estacionamento.", 3000, Notification.Position.TOP_CENTER)
+                    Notification.show("Entrada recusada, pois o cliente já possui outro veículo no estacionamento", 3000, Notification.Position.TOP_CENTER)
                                 .addThemeVariants(NotificationVariant.LUMO_ERROR); 
                     return false;
                 }
@@ -63,7 +63,7 @@ public class ServicoDeEstacionamento {
             Estudante aluno = (Estudante) cli;
             int cred = aluno.getCreditos();
             if (cred < -15) {
-                    Notification.show("Entrada recusada, por insuficiência de créditos.", 3000, Notification.Position.TOP_CENTER)
+                    Notification.show("Entrada recusada, por insuficiência de créditos", 3000, Notification.Position.TOP_CENTER)
                                 .addThemeVariants(NotificationVariant.LUMO_ERROR);
                     return false;
             } else if (cred < 0) {

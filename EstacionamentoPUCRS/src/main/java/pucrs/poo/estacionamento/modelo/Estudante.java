@@ -1,6 +1,5 @@
 package pucrs.poo.estacionamento.modelo;
 
-import pucrs.poo.estacionamento.vaadin.*;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -49,7 +48,7 @@ public class Estudante extends Cliente {
             return true;
         } 
         else {
-            Notification.show("O cliente não é permitido a adicionar mais veículos.", 3000, Notification.Position.TOP_CENTER)
+            Notification.show("O cliente não é permitido a adicionar mais veículos", 3000, Notification.Position.TOP_CENTER)
                         .addThemeVariants(NotificationVariant.LUMO_ERROR); 
             return false;
         }

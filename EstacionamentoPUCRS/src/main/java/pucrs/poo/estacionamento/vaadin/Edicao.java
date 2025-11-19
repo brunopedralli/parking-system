@@ -77,7 +77,6 @@ public class Edicao extends VerticalLayout {
         HorizontalLayout botoesLayout = new HorizontalLayout(salvarButton, cancelarButton);
 
         grid.setItems(cadClientes.getLista());
-
         grid.setColumns("nome", "cpf", "celular", "tipo", "veiculos");
         grid.asSingleSelect().addValueChangeListener(event -> preparaEdicaoCliente(event));
 
