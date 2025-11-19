@@ -86,21 +86,9 @@ public class Estacionamento extends VerticalLayout {
 
     private void entrar() {
         String veiculo = placa.getValue();
-        boolean placaVazia = veiculo == null || veiculo.isEmpty();
-
-        if (placaVazia) {
-            Notification.show("Insira o veículo que deseja adentrar ao estacionamento", 3000, Notification.Position.TOP_CENTER)
-                        .addThemeVariants(NotificationVariant.LUMO_ERROR); 
-            return;
-        }
+        if (!verificarPlaca(veiculo)) return;
         
         Cliente c = cadClientes.getPorPlaca(veiculo);
-        if (c == null) {
-            Notification.show("Não existem clientes cadastrados com a placa informada", 3000, Notification.Position.TOP_CENTER)
-                        .addThemeVariants(NotificationVariant.LUMO_ERROR); 
-            return;
-        }
-        
         boolean entrou = gerEstacionamento.entrada(veiculo, LocalDateTime.now());
         if (entrou) Notification.show("Usuário " + c.getNome() + " entrou no estacionamento com sucesso!", 3000, Notification.Position.BOTTOM_STRETCH);
 
@@ -110,19 +98,33 @@ public class Estacionamento extends VerticalLayout {
 
     private void sair() {
         String veiculo = placa.getValue();
-        boolean placaVazia = veiculo == null || veiculo.isEmpty();
+        if (!verificarPlaca(veiculo)) return;
+
+        Cliente c = cadClientes.getPorPlaca(veiculo);
+        boolean saiu = gerEstacionamento.saida(veiculo, LocalDateTime.now());
+        if (saiu) Notification.show("Cliente " + c.getNome() + " saiu do estacionamento com sucesso!", 3000, Notification.Position.BOTTOM_STRETCH);
+
+        grid.getDataProvider().refreshAll();
+        limparFormulario();
+    }
+
+    private boolean verificarPlaca(String placa) {
+        boolean placaVazia = placa == null || placa.isEmpty();
 
         if (placaVazia) {
             Notification.show("Insira o veículo com o qual deseja sair estacionamento", 3000, Notification.Position.TOP_CENTER)
                         .addThemeVariants(NotificationVariant.LUMO_ERROR); 
-            return;
+            return false;
         }
         
-        boolean saiu = gerEstacionamento.saida(veiculo, LocalDateTime.now());
-        if (saiu) Notification.show("Veículo " + veiculo + "saiu no estacionamento com sucesso!", 3000, Notification.Position.BOTTOM_STRETCH);
+        Cliente c = cadClientes.getPorPlaca(placa);
+        if (c == null) {
+            Notification.show("Não existem clientes cadastrados com a placa informada", 3000, Notification.Position.TOP_CENTER)
+                        .addThemeVariants(NotificationVariant.LUMO_ERROR); 
+            return false;
+        }
 
-        grid.getDataProvider().refreshAll();
-        limparFormulario();
+        return true;
     }
 
     private void limparFormulario() {
