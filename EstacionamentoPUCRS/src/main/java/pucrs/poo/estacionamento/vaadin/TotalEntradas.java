@@ -42,7 +42,7 @@ public class TotalEntradas extends VerticalLayout {
         cadClientes = CadastroClientes.getInstance();
         regHistorico = RegistroHistorico.getInstance();
 
-        tipoUsuario = new ComboBox<>("Recarga");
+        tipoUsuario = new ComboBox<>("Tipo de Usuário");
         tipoUsuario.setItems("Estudate", "Funcionário", "Tecnopuc");
 
         dataInicial = new DateTimePicker("Data inicial");
@@ -78,7 +78,7 @@ public class TotalEntradas extends VerticalLayout {
         backButton.addClickListener(e -> UI.getCurrent().navigate("gerencial"));
         add(backButton);
 
-        habilitarFormulario(false);
+        habilitarFormulario(true);
     }
 
     private void buscarEntradas() {

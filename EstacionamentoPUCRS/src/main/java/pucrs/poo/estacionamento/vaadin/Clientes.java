@@ -9,7 +9,7 @@ import com.vaadin.flow.router.RouterLink;
 @Route("clientes")
 public class Clientes extends VerticalLayout {
    public Clientes() {
-      add(new RouterLink("Cadastro de clientes", Cadastro.class));
+      add(new RouterLink("Cadastro de Clientes", Cadastro.class));
       add(new RouterLink("Atualização de Clientes", Edicao.class));
    }
 }

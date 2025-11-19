@@ -85,7 +85,7 @@ public class Edicao extends VerticalLayout {
         add(new Hr());
 
         Button backButton = new Button("Voltar");
-        backButton.addClickListener(e -> UI.getCurrent().navigate("financeiro"));
+        backButton.addClickListener(e -> UI.getCurrent().navigate("clientes"));
         add(backButton);
 
         habilitarFormulario(false);
