@@ -118,7 +118,8 @@ public class ServicoDeEstacionamento {
                                     LocalDateTime.now();
 
                         // Registra a entrada no estacionamento
-                        this.entrada(placa, horarioEntrada);
+                        entradas.put(placa, horarioEntrada);
+                        ocupacao++;
                     });
         } catch (java.io.IOException e) {
             throw new RuntimeException("Erro ao ler arquivo de entradas: " + 
