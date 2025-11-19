@@ -17,7 +17,7 @@ public class ServicoDeEstacionamento {
     private Map<String, LocalDateTime> veiculosEstacionados;
     private CadastroClientes cadClientes;
 
-    public ServicoDeEstacionamento getInstance() {
+    public static ServicoDeEstacionamento getInstance() {
         if (instance == null) {
             instance = new ServicoDeEstacionamento();
         }
@@ -29,6 +29,10 @@ public class ServicoDeEstacionamento {
         this.cadClientes = CadastroClientes.getInstance();
         this.veiculosEstacionados = this.carregaDeEntradasMap("entradas.dat");
         this.ocupacao = 0;
+    }
+
+    public Map<String, LocalDateTime> getEstacionamento() {
+        return veiculosEstacionados;
     }
     
     public void entrada(String placa, LocalDateTime horarioEntrada) {

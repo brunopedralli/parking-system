@@ -103,6 +103,7 @@ public class RecargaDeCreditos extends VerticalLayout {
         if (creditosAdd.getValue() == null) {
             Notification.show("Selecione uma quantidade de créditos para adicionar", 3000, Notification.Position.TOP_CENTER)
                         .addThemeVariants(NotificationVariant.LUMO_ERROR); 
+            return;
         }
 
         Estudante c = (Estudante) cadClientes.getPorCpf(cpf.getValue());
