@@ -7,8 +7,6 @@ import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.checkbox.Checkbox;
-import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
@@ -20,18 +18,13 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.IntegerField;
-import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 import pucrs.poo.estacionamento.modelo.CadastroClientes;
 import pucrs.poo.estacionamento.modelo.Cliente;
-import pucrs.poo.estacionamento.modelo.Estudante;
-import pucrs.poo.estacionamento.modelo.Pucrs;
 import pucrs.poo.estacionamento.modelo.ServicoDeEstacionamento;
-import pucrs.poo.estacionamento.modelo.Tecnopuc;
 
 @PageTitle("Estacionamento")
 @Route("estacionamento")

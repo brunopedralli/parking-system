@@ -1,20 +1,35 @@
 package pucrs.poo.estacionamento.modelo;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RegistroHistorico {
-    private LocalDateTime dataEntrada;
-    private LocalDateTime dataSaida;
+    private List<Historico> registros;
+    private static RegistroHistorico instance;
 
-    public LocalDateTime getDataEntrada() {
-        return dataEntrada;
+    public static RegistroHistorico getInstance() {
+        if (instance == null) {
+            instance = new RegistroHistorico();
+        }
+
+        return instance;
     }
 
-    public LocalDateTime getDataSaida() {
-        return dataSaida;
+    private RegistroHistorico() {
+        this.registros = new ArrayList<>();
     }
-    public RegistroHistorico(LocalDateTime dataEntrada, LocalDateTime dataSaida) {
-        this.dataEntrada = dataEntrada;
-        this.dataSaida = dataSaida;
+
+    public void add(String placa, LocalDateTime dataEntrada, LocalDateTime dataSaida) {
+        Historico h = new Historico(placa, dataEntrada, dataSaida);
+        this.registros.add(h);
+    }
+
+    public void add(Historico h) {
+        this.registros.add(h);
+    }
+
+    public List<Historico> getRegistros() {
+        return this.registros;
     }
 }

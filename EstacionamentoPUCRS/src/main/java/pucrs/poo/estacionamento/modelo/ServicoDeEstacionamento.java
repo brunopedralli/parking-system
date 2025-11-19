@@ -15,6 +15,7 @@ public class ServicoDeEstacionamento {
     private int ocupacao;
     private Map<String, LocalDateTime> veiculosEstacionados;
     private CadastroClientes cadClientes;
+    private RegistroHistorico regHistorico;
 
     public static ServicoDeEstacionamento getInstance() {
         if (instance == null) {
@@ -89,6 +90,7 @@ public class ServicoDeEstacionamento {
 
         veiculosEstacionados.remove(placa);
         ocupacao--;
+        regHistorico.add(placa, horarioEntrada, horarioSaida);
         return true;
     }
 
