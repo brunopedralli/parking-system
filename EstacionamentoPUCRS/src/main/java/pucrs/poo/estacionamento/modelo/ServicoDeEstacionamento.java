@@ -27,8 +27,9 @@ public class ServicoDeEstacionamento {
 
     private ServicoDeEstacionamento() {
         this.cadClientes = CadastroClientes.getInstance();
-        this.veiculosEstacionados = this.carregaDeEntradasMap("entradas.dat");
+        this.regHistorico = RegistroHistorico.getInstance();
         this.ocupacao = 0;
+        this.veiculosEstacionados = this.carregaDeEntradasMap("entradas.dat");
     }
 
     public Map<String, LocalDateTime> getEstacionamento() {
@@ -117,7 +118,7 @@ public class ServicoDeEstacionamento {
                                     LocalDateTime.now();
 
                         // Registra a entrada no estacionamento
-                        entradas.put(placa, horarioEntrada);
+                        this.entrada(placa, horarioEntrada);
                     });
         } catch (java.io.IOException e) {
             throw new RuntimeException("Erro ao ler arquivo de entradas: " + 
