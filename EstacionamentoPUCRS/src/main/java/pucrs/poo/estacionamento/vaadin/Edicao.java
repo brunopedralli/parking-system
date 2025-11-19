@@ -80,7 +80,7 @@ public class Edicao extends VerticalLayout {
 
         grid.setItems(cadClientes.getLista());
 
-        grid.setColumns("nome", "cpf", "celular", "veiculos");
+        grid.setColumns("nome", "cpf", "celular", "tipo", "veiculos");
         grid.asSingleSelect().addValueChangeListener(event -> preparaEdicaoCliente(event));
 
         add(formLayout, botoesLayout, new H2("Clientes Cadastrados"), grid);
@@ -96,13 +96,13 @@ public class Edicao extends VerticalLayout {
     private void atualizarCliente() {
         Cliente c = cadClientes.getPorCpf(cpf.getValue());
 
-        if (veiculos.getValue() == null && novoVeiculo.getValue() == null) {
+        if (veiculos.getValue().equals("") && novoVeiculo.getValue().equals("")) {
             Notification.show("Selecione algum veículo para atualizar", 3000, Notification.Position.TOP_CENTER)
                         .addThemeVariants(NotificationVariant.LUMO_ERROR); 
             return;
         }   
 
-        if (veiculos.getValue() == null) {
+        if (veiculos.getValue().equals("")) {
             c.cadastraVeiculo(novoVeiculo.getValue());
         } 
         else {
