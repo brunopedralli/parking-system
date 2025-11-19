@@ -117,7 +117,6 @@ public class TotalEntradas extends VerticalLayout {
         Notification.show(mensagem, 3000, Notification.Position.BOTTOM_STRETCH);
 
         grid.getDataProvider().refreshAll();
-        limparFormulario();
         habilitarFormulario(true);
     }
 
