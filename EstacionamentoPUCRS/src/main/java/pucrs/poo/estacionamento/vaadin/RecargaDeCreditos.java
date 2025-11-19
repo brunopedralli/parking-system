@@ -1,5 +1,7 @@
 package pucrs.poo.estacionamento.vaadin;
 
+import java.util.Set;
+
 import com.vaadin.flow.component.AbstractField.ComponentValueChangeEvent;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.UI;
@@ -38,6 +40,7 @@ public class RecargaDeCreditos extends VerticalLayout {
     private final Button salvarButton;
     private final Button cancelarButton;
     private final Grid<Estudante> grid;
+    Set<Integer> valores = Estudante.valoresRecarga;
     Estudante estudanteSelecionado;
 
     public RecargaDeCreditos() {
@@ -56,7 +59,7 @@ public class RecargaDeCreditos extends VerticalLayout {
         creditos.setReadOnly(true);
 
         creditosAdd = new ComboBox<>("Recarga");
-        creditosAdd.setItems(15, 50, 100, 150);
+        creditosAdd.setItems(valores);
 
         grid = new Grid<>(Estudante.class);
 

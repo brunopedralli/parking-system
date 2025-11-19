@@ -11,8 +11,8 @@ import com.vaadin.flow.component.notification.NotificationVariant;
 
 public class Estudante extends Cliente {
     private int creditos;
-    private static final Set<Integer> valoresRecarga = new HashSet<>(
-        Arrays.asList(10, 50, 100)
+    public static final Set<Integer> valoresRecarga = new HashSet<>(
+        Arrays.asList(15, 50, 100, 150)
     );
 
     public Estudante(String cpf, String nome, String celular, int creditos) {
