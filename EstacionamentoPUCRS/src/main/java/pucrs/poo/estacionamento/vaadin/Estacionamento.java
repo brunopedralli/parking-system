@@ -19,6 +19,7 @@ public class Estacionamento extends VerticalLayout {
         backButton.addClickListener(e -> UI.getCurrent().navigate(""));
         add(backButton);
     }
+
     public void Entrada() {
         TextField placaField = new TextField("Placa do Veículo");
         Button entrarButton = new Button("Registrar Entrada");
@@ -37,6 +38,28 @@ public class Estacionamento extends VerticalLayout {
             Notification.show(" ERRO ao registrar entrada: " + ex.getMessage(), 5000, Notification.Position.MIDDLE);
         }
     });
-    add(placaField, entrarButton);
+        add(placaField, entrarButton);
+    }
+
+    public void Saida() {
+        TextField placaField = new TextField("Placa do Veículo");
+        Button sairButton = new Button("Registrar Saída");
+
+        sairButton.addClickListener(e -> {
+        String placa = placaField.getValue().trim().toUpperCase();
+
+        if (placa.isEmpty() || placa.length() < 7) { 
+            Notification.show("Por favor, insira uma placa válida (mínimo 7 caracteres).", 3000, Notification.Position.MIDDLE);
+            return;
+        }
+        try {
+        Notification.show("Veículo " + placa + " saiu do estacionamento com sucesso!", 3000, Notification.Position.MIDDLE);
+            placaField.setValue("");
+        } catch (Exception ex) {
+            Notification.show(" ERRO ao registrar saída: " + ex.getMessage(), 5000, Notification.Position.MIDDLE);
+        }
+    });
+        add(placaField, sairButton);
+        calculaCusto();
     }
 }
