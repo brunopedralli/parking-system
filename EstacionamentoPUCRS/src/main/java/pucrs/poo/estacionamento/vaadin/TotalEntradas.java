@@ -92,14 +92,14 @@ public class TotalEntradas extends VerticalLayout {
             return;
         }
 
-        if (tipo == null || tipo.isEmpty()) {
-            Notification.show("Selecione um tipo de usuário", 3000, Notification.Position.TOP_CENTER)
+        if (dataI.isAfter(dataF)) {
+            Notification.show("Selecione um intervalo de datas válido", 3000, Notification.Position.TOP_CENTER)
                         .addThemeVariants(NotificationVariant.LUMO_ERROR); 
             return;
         }
 
-        if (dataI.isAfter(dataF)) {
-            Notification.show("Selecione um intervalo de datas válido", 3000, Notification.Position.TOP_CENTER)
+        if (tipo == null || tipo.isEmpty()) {
+            Notification.show("Selecione um tipo de usuário", 3000, Notification.Position.TOP_CENTER)
                         .addThemeVariants(NotificationVariant.LUMO_ERROR); 
             return;
         }
@@ -107,6 +107,7 @@ public class TotalEntradas extends VerticalLayout {
         List<Historico> lista = regHistorico.getRegistros().stream()
                                                 .filter((Historico h) -> cadClientes.getPorPlaca(h.getPlaca()).getTipo().equals(tipo))
                                                 .filter((Historico h) -> h.getDataEntrada().isAfter(dataI))
+                                                .filter((Historico h) -> h.getDataSaida().isBefore(dataF))
                                                 .toList();
 
         grid.setItems(lista);
