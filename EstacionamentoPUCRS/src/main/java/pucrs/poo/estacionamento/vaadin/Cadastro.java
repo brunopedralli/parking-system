@@ -1,6 +1,5 @@
 package pucrs.poo.estacionamento.vaadin;
 
-import pucrs.poo.estacionamento.modelo.*;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
