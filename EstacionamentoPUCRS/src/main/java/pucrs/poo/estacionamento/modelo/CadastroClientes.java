@@ -64,25 +64,27 @@ public class CadastroClientes {
                             for (int i = 5; i < partes.length; i++) {
                                 cliente.cadastraVeiculo(partes[i]);
                             }
-                        } else if (partes[4].equals("Tecnopuc")) {
+                        } 
+                        else if (partes[4].equals("Tecnopuc")) {
                             int debito = Integer.parseInt(partes[3]);
                             cliente = new Tecnopuc(cpf, nome, celular, debito);
                             for (int i = 5; i < partes.length; i++) {
                                 cliente.cadastraVeiculo(partes[i]);
                             }
-                        } else if (partes[3].equals("Pucrs")) {
+                        } 
+                        else if (partes[3].equals("Pucrs")) {
                             cliente = new Pucrs(cpf, nome, celular);
                             for (int i = 4; i < partes.length; i++) {
                                 cliente.cadastraVeiculo(partes[i]);
                             }
-                        } else {
+                        } 
+                        else {
                             throw new IllegalArgumentException("Tipo de cliente desconhecido: " + partes[4]);
                         }
                         clientes.add(cliente);
                     });
         } catch (java.io.IOException | IllegalArgumentException e) {
-            throw new RuntimeException("Erro ao ler arquivo de clientes: " + 
-                                                               e.getMessage(), e);
+            throw new RuntimeException("Erro ao ler arquivo de clientes: " + e.getMessage(), e);
         }
         return clientes;
     }

@@ -2,8 +2,7 @@ package pucrs.poo.estacionamento.vaadin;
 
 import java.time.LocalDateTime;
 import java.time.Year;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.List;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -23,23 +22,32 @@ import pucrs.poo.estacionamento.modelo.RegistroBoletos;
 @PageTitle("Gerar Boleto")
 @Route("finaceiro/gerar-boleto")
 public class GerarBoleto extends VerticalLayout {
+    private final RegistroBoletos regBoleto;
+    private final TextField anoField;
+    private final ComboBox<Integer> mesCombo;
+    private final Button backButton;
+    private final Button gerarButton;
+    private final Button registrarPagamento;
+    private final Grid<Boleto> grid;
 
     public GerarBoleto() {
         add(new Hr());
 
-        Button backButton = new Button("Voltar");
-        backButton.addClickListener(e -> UI.getCurrent().navigate(""));
+        regBoleto = RegistroBoletos.getInstance();
 
-        ComboBox<Integer> mesCombo = new ComboBox<>("Mês");
-        mesCombo.setItems(IntStream.rangeClosed(1, 12).boxed().collect(Collectors.toList()));
+        backButton = new Button("Voltar");
+        backButton.addClickListener(e -> UI.getCurrent().navigate("financeiro"));
+
+        mesCombo = new ComboBox<>("Mês");
+        mesCombo.setItems(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
         mesCombo.setValue(LocalDateTime.now().getMonthValue());
 
-        TextField anoField = new TextField("Ano");
+        anoField = new TextField("Ano");
         anoField.setValue(String.valueOf(Year.now().getValue()));
 
-        Button gerarButton = new Button("Gerar Boletos");
+        gerarButton = new Button("Gerar Boletos");
 
-        Grid<Boleto> grid = new Grid<>(Boleto.class, false);
+        grid = new Grid<>(Boleto.class, false);
         grid.addColumn(Boleto::getClienteNome).setHeader("Empresa");
         grid.addColumn(b -> String.format("%02d/%04d", b.getMes(), b.getAno())).setHeader("Mês/Ano");
         grid.addColumn(Boleto::getValor).setHeader("Valor");
@@ -47,7 +55,7 @@ public class GerarBoleto extends VerticalLayout {
 
         gerarButton.addClickListener(e -> {
             Integer mes = mesCombo.getValue();
-            int ano = Year.now().getValue();
+            int ano;
             try {
                 if (mes == null) {
                     Notification.show("Selecione um mês", 3000, Notification.Position.TOP_CENTER).addThemeVariants(NotificationVariant.LUMO_ERROR);
@@ -59,16 +67,17 @@ public class GerarBoleto extends VerticalLayout {
                 return;
             }
 
-            var gerados = RegistroBoletos.getInstance().gerarBoletosParaMesAno(mes, ano);
+            List<Boleto> gerados = regBoleto.gerarBoletosParaMesAno(mes, ano);
             if (gerados.isEmpty()) {
                 Notification.show("Nenhum boleto novo gerado", 3000, Notification.Position.TOP_CENTER);
-            } else {
+            } 
+            else {
                 Notification.show(gerados.size() + " boletos gerados", 3000, Notification.Position.TOP_CENTER);
             }
-            grid.setItems(RegistroBoletos.getInstance().getBoletos());
+            grid.setItems(regBoleto.getBoletos());
         });
 
-        Button registrarPagamento = new Button("Registrar Pagamento");
+        registrarPagamento = new Button("Registrar Pagamento");
         registrarPagamento.addClickListener(e -> {
             var opt = grid.getSelectionModel().getFirstSelectedItem();
             if (opt.isEmpty()) {
@@ -80,13 +89,11 @@ public class GerarBoleto extends VerticalLayout {
                 Notification.show("Boleto já está pago", 2500, Notification.Position.TOP_CENTER);
                 return;
             }
-            RegistroBoletos.getInstance().registrarPagamento(b, LocalDateTime.now());
+            regBoleto.registrarPagamento(b, LocalDateTime.now());
             grid.getDataProvider().refreshItem(b);
             Notification.show("Pagamento registrado", 2500, Notification.Position.TOP_CENTER);
         });
 
         add(backButton, mesCombo, anoField, gerarButton, registrarPagamento, grid);
-        setSizeFull();
     }
-
 }

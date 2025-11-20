@@ -2,6 +2,7 @@ package pucrs.poo.estacionamento.vaadin;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -23,6 +24,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 import pucrs.poo.estacionamento.modelo.CadastroClientes;
+import pucrs.poo.estacionamento.modelo.Cliente;
 import pucrs.poo.estacionamento.modelo.Historico;
 import pucrs.poo.estacionamento.modelo.RegistroHistorico;
 
@@ -105,7 +107,10 @@ public class TotalEntradas extends VerticalLayout {
         }
 
         List<Historico> lista = regHistorico.getRegistros().stream()
-                                                .filter((Historico h) -> cadClientes.getPorPlaca(h.getPlaca()).getTipo().equals(tipo))
+                                                .filter((Historico h) -> {
+                                                    Cliente cli = cadClientes.getPorPlaca(h.getPlaca());
+                                                    return cli != null && cli.getTipo().equals(tipo);
+                                                })
                                                 .filter((Historico h) -> h.getDataEntrada().isAfter(dataI))
                                                 .filter((Historico h) -> h.getDataSaida().isBefore(dataF))
                                                 .toList();

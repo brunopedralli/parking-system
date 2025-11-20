@@ -2,6 +2,7 @@ package pucrs.poo.estacionamento.modelo;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -108,23 +109,20 @@ public class ServicoDeEstacionamento {
                     .forEach(linha -> {
                         String[] partes = linha.split(",");
                         String placa = partes[0];
-                        // String data = partes[1];
-                        // String hora = partes[2];
+                        String data = partes[1];
+                        String hora = partes[2];
 
                         // Combina data e hora e converte para LocalDateTime
-                        // String dataHora = data + " " + hora;
-                        // DateTimeFormatter formatter = 
-                                    // DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-                        LocalDateTime horarioEntrada = 
-                                    LocalDateTime.now();
+                        String dataHora = data + " " + hora;
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                        LocalDateTime horarioEntrada = LocalDateTime.parse(dataHora, formatter);
 
                         // Registra a entrada no estacionamento
                         entradas.put(placa, horarioEntrada);
                         ocupacao++;
                     });
         } catch (java.io.IOException e) {
-            throw new RuntimeException("Erro ao ler arquivo de entradas: " + 
-                                                               e.getMessage(), e);
+            throw new RuntimeException("Erro ao ler arquivo de entradas: " + e.getMessage(), e);
         }
         return entradas;
     }

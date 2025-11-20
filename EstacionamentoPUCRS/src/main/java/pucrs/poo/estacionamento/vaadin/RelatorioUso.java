@@ -24,6 +24,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 import pucrs.poo.estacionamento.modelo.CadastroClientes;
+import pucrs.poo.estacionamento.modelo.Cliente;
 import pucrs.poo.estacionamento.modelo.Historico;
 import pucrs.poo.estacionamento.modelo.RegistroHistorico;
 
@@ -104,7 +105,10 @@ public class RelatorioUso extends VerticalLayout {
         }
 
         List<Historico> lista = regHistorico.getRegistros().stream()
-                                                .filter((Historico h) -> cadClientes.getPorCpf(pessoa).getVeiculos().contains(h.getPlaca()))
+                                                .filter((Historico h) -> {
+                                                    Cliente cli = cadClientes.getPorCpf(pessoa);
+                                                    return cli != null && cli.getVeiculos().contains(h.getPlaca());
+                                                })
                                                 .filter((Historico h) -> h.getDataEntrada().isAfter(dataI))
                                                 .filter((Historico h) -> h.getDataSaida().isBefore(dataF))
                                                 .toList();

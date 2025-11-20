@@ -20,7 +20,7 @@ public class Tecnopuc extends Cliente {
         return "Tecnopuc";
     }
 
-    public void abateDebito(int valor) {
+    public void abateDebito(double valor) {
         this.debitos -= valor;
     }
 

@@ -21,14 +21,12 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-import pucrs.poo.estacionamento.modelo.CadastroClientes;
 import pucrs.poo.estacionamento.modelo.Historico;
 import pucrs.poo.estacionamento.modelo.RegistroHistorico;
 
 @PageTitle("Receita Total")
 @Route("financeiro/receita-total")
 public class ReceitaTotal extends VerticalLayout {
-    private final CadastroClientes cadClientes;
     private final RegistroHistorico regHistorico;
     private final ComboBox<String> mes;
     private final ComboBox<Integer> ano;
@@ -37,7 +35,6 @@ public class ReceitaTotal extends VerticalLayout {
     private final Grid<Historico> grid;
 
     public ReceitaTotal() {
-        cadClientes = CadastroClientes.getInstance();
         regHistorico = RegistroHistorico.getInstance();
 
         mes = new ComboBox<>("Mês");
@@ -51,14 +48,14 @@ public class ReceitaTotal extends VerticalLayout {
         setSpacing(true);
         setPadding(true);
 
-        add(new H2("Relatório de Uso por Usuário"));
+        add(new H2("Receita Total"));
 
         FormLayout formLayout = new FormLayout(mes, ano);
 
         buscarButton = new Button("Buscar", VaadinIcon.CHECK.create());
         buscarButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         buscarButton.addClickShortcut(Key.ENTER);
-        buscarButton.addClickListener(click -> this.gerarRelatorio());
+        buscarButton.addClickListener(click -> this.gerarReceita());
 
         cancelarButton = new Button("Cancelar");
         Dialog dialogoCancelamento = criaDialogoDeCancelamento();
@@ -73,13 +70,13 @@ public class ReceitaTotal extends VerticalLayout {
         add(new Hr());
 
         Button backButton = new Button("Voltar");
-        backButton.addClickListener(e -> UI.getCurrent().navigate("gerencial"));
+        backButton.addClickListener(e -> UI.getCurrent().navigate("financeiro"));
         add(backButton);
 
         habilitarFormulario(true);
     }
 
-    private void gerarRelatorio() {
+    private void gerarReceita() {
         boolean semMes = mes.getValue() == null || mes.getValue().isEmpty();
         boolean semAno = ano.getValue() == null;
 
@@ -132,7 +129,6 @@ public class ReceitaTotal extends VerticalLayout {
         }
 
         int y = ano.getValue();
-
 
         List<Historico> lista = regHistorico.getRegistros().stream()
                                                 .filter((Historico h) -> h.getDataEntrada().getMonthValue() == m)

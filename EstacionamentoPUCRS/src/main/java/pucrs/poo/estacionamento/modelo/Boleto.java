@@ -3,6 +3,7 @@ package pucrs.poo.estacionamento.modelo;
 import java.time.LocalDateTime;
 
 public class Boleto {
+    private CadastroClientes cadClientes;
     private String clienteCpf;
     private String clienteNome;
     private int mes;
@@ -19,6 +20,7 @@ public class Boleto {
         this.valor = valor;
         this.pago = false;
         this.dataPagamento = null;
+        cadClientes = CadastroClientes.getInstance();
     }
 
     public String getClienteCpf() {
@@ -50,6 +52,9 @@ public class Boleto {
     }
 
     public void registrarPagamento(LocalDateTime dataPagamento) {
+        Tecnopuc cli = (Tecnopuc) cadClientes.getPorCpf(this.clienteCpf);
+        cli.abateDebito(this.valor);
+
         this.pago = true;
         this.dataPagamento = dataPagamento;
     }
