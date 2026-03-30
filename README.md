@@ -31,7 +31,6 @@ Java-based parking management system designed to support software development co
 - [EstacionamentoPUCRS](EstacionamentoPUCRS): main application (Spring Boot + Vaadin).
 - [create-project.sh](create-project.sh): script to generate a basic Maven/Java project.
 - [create-vaadin-project.sh](create-vaadin-project.sh): script to generate a Maven/Spring Boot/Vaadin project.
-- [create-readme.prompt.md](create-readme.prompt.md): prompt used to generate the README.
 
 ## How To Get Started
 
