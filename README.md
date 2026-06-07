@@ -31,7 +31,7 @@ Or use the included Dev Container (requires Docker and VS Code with the Dev Cont
 
 ```bash
 git clone <repo-url>
-cd parking-system/EstacionamentoPUCRS
+cd parking-system
 mvn spring-boot:run
 ```
 
@@ -53,7 +53,7 @@ mvn clean install
 ## Project Structure
 
 ```
-EstacionamentoPUCRS/
+parking-system/
 ├── src/main/java/pucrs/poo/estacionamento/
 │   ├── modelo/          # Business logic (clients, parking service, invoices, history)
 │   └── vaadin/          # Vaadin UI views (entry/exit, registration, reports, finance)
